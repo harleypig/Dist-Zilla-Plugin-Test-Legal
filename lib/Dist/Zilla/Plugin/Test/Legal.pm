@@ -32,8 +32,7 @@ __[ xt/release/test-legal.t ]__
 use strict;
 use warnings;
 use Test::More;
-use Test::Requires { 'Test::Legal' };
+use Test::Requires 'Test::Legal';
 
 copyright_ok;
 license_ok;
-done_testing;
