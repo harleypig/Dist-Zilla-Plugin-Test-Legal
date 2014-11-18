@@ -13,6 +13,49 @@ copyright_year   = 2014
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Author prereqs not detected by Dist::Zilla
 ;
+; authordep Dist::Zilla::Plugin::BlockRelease
+; authordep Dist::Zilla::Plugin::CheckChangeLog
+; authordep Dist::Zilla::Plugin::Clean
+; authordep Dist::Zilla::Plugin::ConsistentVersionTest
+; authordep Dist::Zilla::Plugin::CopyReadmeFromBuild
+; authordep Dist::Zilla::Plugin::Git::Check
+; authordep Dist::Zilla::Plugin::GithubMeta
+; authordep Dist::Zilla::Plugin::Git::NextVersion
+; authordep Dist::Zilla::Plugin::HasVersionTests
+; authordep Dist::Zilla::Plugin::InstallGuide
+; authordep Dist::Zilla::Plugin::NoSmartCommentsTests
+; authordep Dist::Zilla::Plugin::OurPkgVersion
+; authordep Dist::Zilla::Plugin::PerlTidy
+; authordep Dist::Zilla::Plugin::PodWeaver
+; authordep Dist::Zilla::Plugin::Prereqs::AuthorDeps
+; authordep Dist::Zilla::Plugin::ReadmeFromPod
+; authordep Dist::Zilla::Plugin::ReportVersions
+; authordep Dist::Zilla::Plugin::Test::ChangesHasContent
+; authordep Dist::Zilla::Plugin::Test::CheckChanges
+; authordep Dist::Zilla::Plugin::Test::CheckDeps
+; authordep Dist::Zilla::Plugin::Test::CheckManifest
+; authordep Dist::Zilla::Plugin::Test::CleanNamespaces
+; authordep Dist::Zilla::Plugin::Test::Compile
+; authordep Dist::Zilla::Plugin::Test::Compile::PerFile
+; authordep Dist::Zilla::Plugin::Test::CPAN::Changes
+; authordep Dist::Zilla::Plugin::Test::CPAN::Meta::JSON
+; authordep Dist::Zilla::Plugin::Test::DistManifest
+; authordep Dist::Zilla::Plugin::Test::EOF
+; authordep Dist::Zilla::Plugin::Test::EOL
+; authordep Dist::Zilla::Plugin::Test::Inline
+; authordep Dist::Zilla::Plugin::Test::Kwalitee
+; authordep Dist::Zilla::Plugin::Test::MinimumVersion
+; authordep Dist::Zilla::Plugin::Test::NoTabs
+; authordep Dist::Zilla::Plugin::Test::PAUSE::Permissions
+; authordep Dist::Zilla::Plugin::Test::Perl::Critic
+; authordep Dist::Zilla::Plugin::Test::Pod::LinkCheck
+; authordep Dist::Zilla::Plugin::Test::Pod::No404s
+; authordep Dist::Zilla::Plugin::Test::PodSpelling
+; authordep Dist::Zilla::Plugin::Test::ReportPrereqs
+; authordep Dist::Zilla::Plugin::Test::UnusedVars
+; authordep Dist::Zilla::Plugin::Test::UseAllModules
+; authordep Dist::Zilla::Plugin::Test::Version
+; authordep Dist::Zilla::Plugin::Travis::TestRelease
 ; authordep Pod::Elemental::Transformer::List
 ; authordep Pod::Weaver::Plugin::EnsureUniqueSections
 ; authordep Pod::Weaver::Plugin::StopWords
@@ -115,7 +158,7 @@ prune_directory = .git
 [Test::CPAN::Changes]
 [Test::CPAN::Meta::JSON]
 [Test::DistManifest]
-[Test::EOF]
+;[Test::EOF]
 [Test::EOL]
 [Test::Inline]
 [Test::Kwalitee]
@@ -212,11 +255,14 @@ Module::Build::Version   = 0
 [Prereqs / TestRequires]
 Test::CheckChanges       = 0
 Test::CheckManifest      = 0
+Test::ConsistentVersion  = 0
 Test::CPAN::Meta::JSON   = 0
+Test::DistManifest       = 0
 Test::HasVersion         = 0
 Test::MinimumVersion     = 0
 Test::NoSmartComments    = 0
-;Test::Pod::Content       = 0
+Test::Perl::Critic       = 0
+Test::Pod::Content       = 0
 Test::Pod::LinkCheck     = 0
 Test::Version            = 0
 
