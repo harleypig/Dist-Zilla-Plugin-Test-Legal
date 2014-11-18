@@ -40,7 +40,7 @@ copyright_year   = 2014
 ; authordep Dist::Zilla::Plugin::Test::CPAN::Changes
 ; authordep Dist::Zilla::Plugin::Test::CPAN::Meta::JSON
 ; authordep Dist::Zilla::Plugin::Test::DistManifest
-; authordep Dist::Zilla::Plugin::Test::EOF
+; SKIP authordep Dist::Zilla::Plugin::Test::EOF
 ; authordep Dist::Zilla::Plugin::Test::EOL
 ; authordep Dist::Zilla::Plugin::Test::Inline
 ; authordep Dist::Zilla::Plugin::Test::Kwalitee
@@ -379,7 +379,7 @@ Dist::Zilla::Plugin::Test::Compile::PerFile                                     
 Dist::Zilla::Plugin::Test::CPAN::Changes                                        = 0
 Dist::Zilla::Plugin::Test::CPAN::Meta::JSON                                     = 0
 Dist::Zilla::Plugin::Test::DistManifest                                         = 0
-Dist::Zilla::Plugin::Test::EOF                                                  = 0
+;Dist::Zilla::Plugin::Test::EOF                                                 = 0
 Dist::Zilla::Plugin::Test::EOL                                                  = 0
 Dist::Zilla::Plugin::Test::Inline                                               = 0
 Dist::Zilla::Plugin::Test::Kwalitee                                             = 0
@@ -511,6 +511,7 @@ Test::DistManifest                                                              
 Test::HasVersion                                                                = 0
 Test::MinimumVersion                                                            = 0
 Test::NoSmartComments                                                           = 0
+Test::PAUSE::Permissions                                                        = 0
 Test::Perl::Critic                                                              = 0
 Test::Pod::Content                                                              = 0
 Test::Pod::LinkCheck                                                            = 0
@@ -518,7 +519,7 @@ Test::Version                                                                   
 
 [ModuleBuild]
 ; https://github.com/Perl-Toolchain-Gang/Module-Build/issues/48
-mb_version = 0.4208
+mb_version                                                                      = 0.4208
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Install Tool
