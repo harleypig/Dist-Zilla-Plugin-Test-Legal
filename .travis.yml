@@ -1,0 +1,39 @@
+language: perl
+perl:
+  - "5.20"
+  - "5.20-extras"
+  - "5.18"
+  - "5.18-extras"
+  - "5.16"
+  - "5.14"
+  - "5.12"
+  - "5.10"
+  - "5.8"
+matrix:
+  allow_failures:
+    - perl: "5.20-extras"
+    - perl: "5.18-extras"
+  fast_finish: true
+branches:
+  only:
+    - /^release_testing\/.*/
+env:
+  - RELEASE_TESTING=1 AUTHOR_TESTING=1
+  - COVERAGE=1
+before_install:
+  - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
+  - source ~/travis-perl-helpers/init
+  - build-perl
+  - perl -V
+  - build-dist
+  - cd $BUILD_DIR
+install:
+  - cpan-install --toolchain
+  - cpan-install --deps
+  - cpan-install --coverage
+before_script:
+  - coverage-setup
+script:
+  - prove -l -s -j$(test-jobs) $(test-files)
+after_success:
+  - coverage-report
