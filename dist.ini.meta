@@ -46,7 +46,7 @@ copyright_year   = 2014
 ; authordep Dist::Zilla::Plugin::Test::Kwalitee
 ; authordep Dist::Zilla::Plugin::Test::MinimumVersion
 ; authordep Dist::Zilla::Plugin::Test::NoTabs
-; authordep Dist::Zilla::Plugin::Test::PAUSE::Permissions
+; SKIP authordep Dist::Zilla::Plugin::Test::PAUSE::Permissions
 ; authordep Dist::Zilla::Plugin::Test::Perl::Critic
 ; authordep Dist::Zilla::Plugin::Test::Pod::LinkCheck
 ; authordep Dist::Zilla::Plugin::Test::Pod::No404s
@@ -264,7 +264,7 @@ prune_directory = .git
 ;[Test::Legal] doesn't make sense in this dist.
 [Test::MinimumVersion]
 [Test::NoTabs]
-[Test::PAUSE::Permissions]
+;[Test::PAUSE::Permissions]
 [Test::Pod::LinkCheck]
 [Test::Pod::No404s]
 [Test::ReportPrereqs]
@@ -351,7 +351,7 @@ Module::Build::Version   = 0
 [Prereqs / BuildRequires]
 Module::Build::Version   = 0
 
-[Prereqs / TestRequires]
+[Prereqs / DevelopRequires]
 Dist::Zilla::Plugin::BlockRelease                                               = 0
 Dist::Zilla::Plugin::CheckChangeLog                                             = 0
 Dist::Zilla::Plugin::Clean                                                      = 0
@@ -385,7 +385,7 @@ Dist::Zilla::Plugin::Test::Inline                                               
 Dist::Zilla::Plugin::Test::Kwalitee                                             = 0
 Dist::Zilla::Plugin::Test::MinimumVersion                                       = 0
 Dist::Zilla::Plugin::Test::NoTabs                                               = 0
-Dist::Zilla::Plugin::Test::PAUSE::Permissions                                   = 0
+;Dist::Zilla::Plugin::Test::PAUSE::Permissions                                   = 0
 Dist::Zilla::Plugin::Test::Perl::Critic                                         = 0
 Dist::Zilla::Plugin::Test::Pod::LinkCheck                                       = 0
 Dist::Zilla::Plugin::Test::Pod::No404s                                          = 0
@@ -503,6 +503,8 @@ Pod::Weaver::Section::SeeAlso                                                   
 Pod::Weaver::Section::SourceGitHub                                              = 0
 Pod::Weaver::Section::Support                                                   = 0
 Pod::Weaver::Section::WarrantyDisclaimer                                        = 0
+
+[Prereqs / TestRequires]
 Test::CheckChanges                                                              = 0
 Test::CheckManifest                                                             = 0
 Test::ConsistentVersion                                                         = 0
@@ -511,7 +513,7 @@ Test::DistManifest                                                              
 Test::HasVersion                                                                = 0
 Test::MinimumVersion                                                            = 0
 Test::NoSmartComments                                                           = 0
-Test::PAUSE::Permissions                                                        = 0
+;Test::PAUSE::Permissions                                                        = 0
 Test::Perl::Critic                                                              = 0
 Test::Pod::Content                                                              = 0
 Test::Pod::LinkCheck                                                            = 0
