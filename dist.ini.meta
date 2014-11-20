@@ -340,19 +340,18 @@ Module::Build::Version = 0
 ;[Prereqs / BuildConflicts]
 
 [Prereqs / TestRequires]
-;Test::CheckChanges        = 0
-;Test::CheckManifest       = 0
-;Test::ConsistentVersion   = 0
-;Test::CPAN::Meta::JSON    = 0
-;Test::DistManifest        = 0
-;Test::HasVersion          = 0
-;Test::MinimumVersion      = 0
-;Test::NoSmartComments     = 0
-;;Test::PAUSE::Permissions  = 0
-;Test::Perl::Critic        = 0
-;Test::Pod::Content        = 0
+Test::CheckChanges        = 0
+Test::CheckManifest       = 0
+Test::ConsistentVersion   = 0
+Test::CPAN::Meta::JSON    = 0
+Test::DistManifest        = 0
+Test::HasVersion          = 0
+Test::MinimumVersion      = 0
+Test::NoSmartComments     = 0
+;Test::PAUSE::Permissions  = 0
+Test::Perl::Critic        = 0
 ;Test::Pod::LinkCheck      = 0
-;Test::Version             = 0
+Test::Version             = 0
 
 ;[Prereqs / TestRecommends]
 ;[Prereqs / TestSuggests]
