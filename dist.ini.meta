@@ -26,11 +26,11 @@ copyright_year   = 2014
 ;   Before Archive
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[ReportPhase/PhaseBegins]
+;[ReportPhase/PhaseBegins]
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [BlockRelease]
-[VerifyPhases]
+;[VerifyPhases]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Author prereqs not detected by Dist::Zilla
@@ -105,16 +105,16 @@ copyright_year   = 2014
 ; SKIP authordep Perl::Critic::StricterSubs
 ; SKIP authordep Perl::Critic::Swift
 ; SKIP authordep Perl::Critic::Tics
-; SKIP authordep Pod::Elemental::Transformer::List
-; SKIP authordep Pod::Elemental::Transformer::List::Converter
-; SKIP authordep Pod::Weaver::Plugin::EnsureUniqueSections
-; SKIP authordep Pod::Weaver::Plugin::StopWords
-; SKIP authordep Pod::Weaver::Section::Availability
-; SKIP authordep Pod::Weaver::Section::Installation
-; SKIP authordep Pod::Weaver::Section::SeeAlso
-; SKIP authordep Pod::Weaver::Section::SourceGitHub
-; SKIP authordep Pod::Weaver::Section::Support
-; SKIP authordep Pod::Weaver::Section::WarrantyDisclaimer
+; authordep Pod::Elemental::Transformer::List
+; authordep Pod::Elemental::Transformer::List::Converter
+; authordep Pod::Weaver::Plugin::EnsureUniqueSections
+; authordep Pod::Weaver::Plugin::StopWords
+; authordep Pod::Weaver::Section::Availability
+; authordep Pod::Weaver::Section::Installation
+; authordep Pod::Weaver::Section::SeeAlso
+; authordep Pod::Weaver::Section::SourceGitHub
+; authordep Pod::Weaver::Section::Support
+; authordep Pod::Weaver::Section::WarrantyDisclaimer
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Before Build
@@ -679,5 +679,5 @@ allow_dirty = .travis.yml
 ;[VersionFromScript]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[ReportPhase/PhaseEnds]
+;[ReportPhase/PhaseEnds]
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
