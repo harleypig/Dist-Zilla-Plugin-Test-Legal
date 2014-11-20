@@ -25,12 +25,14 @@ copyright_year   = 2014
 ;   After Build
 ;   Before Archive
 
+; Phases for 'dzil smoke'
+;   see 'dzil build' above, skips Before Archive
+;   Test Runner
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;[ReportPhase/PhaseBegins]
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-[BlockRelease]
 ;[VerifyPhases]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Author prereqs not detected by Dist::Zilla
@@ -63,6 +65,8 @@ check_all_plugins = 1
 [GatherDir]
 include_dotfiles = 1
 prune_directory = .git
+
+[Git::ExcludeUntracked]
 
 [CPANFile]
 [License]
@@ -122,9 +126,9 @@ stopwords = MERCHANTABILITY
 [Manifest]
 
 ;Shows up in dumpphases here.
-; * ReadmeAnyFromPod => Dist::Zilla::Plugin::ReadmeAnyFromPod
-; * PodRoot => Dist::Zilla::Plugin::ReadmeAnyFromPod
-; * ModuleBuild => Dist::Zilla::Plugin::ModuleBuild
+; * ReadmeAnyFromPod
+; * PodRoot
+; * ModuleBuild
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: File Pruner (Prune Files)
@@ -145,10 +149,11 @@ except = \.perl.*
 ;except = \.perltidyrc
 
 ;Shows up in dumpphases here.
-; * Test::CPAN::Meta::JSON => Dist::Zilla::Plugin::Test::CPAN::Meta::JSON
-; * Git::NextVersion => Dist::Zilla::Plugin::Git::NextVersion
-; * ReadmeAnyFromPod => Dist::Zilla::Plugin::ReadmeAnyFromPod
-; * PodRoot => Dist::Zilla::Plugin::ReadmeAnyFromPod
+; * Git::ExcludeUntracked
+; * Test::CPAN::Meta::JSON
+; * Git::NextVersion
+; * ReadmeAnyFromPod
+; * PodRoot
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Version Provider (Provide Version)
@@ -164,6 +169,7 @@ first_version = 0.01
 [ExtraTests]
 [NextRelease]
 [OurPkgVersion]
+[Git::Contributors]
 
 [PodWeaver]
 
@@ -174,12 +180,12 @@ filename = README.pod
 [PerlTidy]
 
 ;Shows up in dumpphases here.
-; * Test::ChangesHasContent => Dist::Zilla::Plugin::Test::ChangesHasContent
-; * Test::CleanNamespaces => Dist::Zilla::Plugin::Test::CleanNamespaces
-; * Test::Compile => Dist::Zilla::Plugin::Test::Compile
-; * Test::NoTabs => Dist::Zilla::Plugin::Test::NoTabs
-; * Test::PodSpelling => Dist::Zilla::Plugin::Test::PodSpelling
-; * InstallGuide => Dist::Zilla::Plugin::InstallGuide
+; * Test::ChangesHasContent
+; * Test::CleanNamespaces
+; * Test::Compile
+; * Test::NoTabs
+; * Test::PodSpelling
+; * InstallGuide
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Meta Provider (Metadata)
@@ -194,6 +200,9 @@ filename = README.pod
 directory = t
 directory = xt
 
+;Shows up in dumpphases here.
+; * Git::Contributors
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Bundle Config
 ; - description: not sure
@@ -203,6 +212,7 @@ directory = xt
 ; - description: something that creates an install program for a dist
 
 [CheckChangeLog]
+[ExecDir]
 
 [ModuleBuild]
 ; https://github.com/Perl-Toolchain-Gang/Module-Build/issues/48
@@ -223,10 +233,10 @@ mb_version = 0.4208
 ;[GitHubREADME::Badge]
 
 ;Shows up in dumpphases here.
-; * ReadmeAnyFromPod => Dist::Zilla::Plugin::ReadmeAnyFromPod
-; * PodRoot => Dist::Zilla::Plugin::ReadmeAnyFromPod
-; * PromptIfStale => Dist::Zilla::Plugin::PromptIfStale
-; * Git::Check => Dist::Zilla::Plugin::Git::Check
+; * ReadmeAnyFromPod
+; * PodRoot
+; * PromptIfStale
+; * Git::Check
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Before Archive
@@ -239,16 +249,76 @@ mb_version = 0.4208
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: ExecFiles
+;; Where are these phases executed?
 
-[ExecDir]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Build Runner
+; - description: Builds dist?
+
+;Shows up in dumpphases here.
+; * ModuleBuild
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Test Runner
+; - description: Runs tests?
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Encoding Provider
+; - description: detects encoding type for files?
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Minting Profile
+; - description: something that can find a minting profile dir
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Module Maker
+; - description: something that injects module files into the dist
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Prereq Source
+; - description: something that registers prerequisites
+
+;Shows up in dumpphases here.
+; * MetaTests
+; * PodCoverageTests
+; * PodSyntaxTests
+; * Test::CheckDeps
+; * Test::CleanNamespaces
+; * Test::Compile
+; * Test::CPAN::Changes
+; * Test::EOL
+; * Test::Kwalitee
+; * Test::NoTabs
+; * Test::ReportPrereqs
+; * Test::UseAllModules
+; * Test::PodSpelling
+; * ModuleBuild
+; * AutoPrereqs
+; * Prereqs::AuthorDeps
+; * ConfigureRequires
+; * BuildRequires
+; * TestRequires
+; * ifnotENV::FakeRelease
+; * ifENV::UploadToCPAN
+; * ifENV::GitCommit
+; * ifENV::GitCommitBuild
+; * ifENV::GitTag
+; * ifENV::GitPush
+; * ifENV::Twitter
+; * ifENV::SchwartzRatio
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Register Prereqs
 
 ; NOTE: This is being called sometime during 'dzil build' but is not
 ;       being reported by ReportPhase, so I'm not sure where this
-;       belongs in the list at the top of this file.
+;       belongs in the lists at the top of this file.
 
 [AutoPrereqs]
 
@@ -262,9 +332,7 @@ Module::Build::Version = 0
 ;[Prereqs / ConfigureSuggests]
 ;[Prereqs / ConfigureConflicts]
 
-[Prereqs / BuildRequires]
-;Module::Build::Version   = 0
-
+;[Prereqs / BuildRequires]
 ;[Prereqs / BuildRecommends]
 ;[Prereqs / BuildSuggests]
 ;[Prereqs / BuildConflicts]
@@ -318,44 +386,72 @@ allow_dirty = .travis.yml
 [Travis::TestRelease]
 [ConfirmRelease]
 
+[BlockRelease]
+
+;Shows up in dumpphases here.
+; * PromptIfStale
+; * Git::NextVersion
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Releaser
 ; - description: something that makes a release of the dist
-; Uncomment [Twitter] when switching to [UploadToCPAN]
-[FakeRelease]
-;[UploadToCPAN]
 
-;[Run::Release]
+[if::not::ENV / ifnotENV::FakeRelease]
+key = REALRELEASE
+dz_plugin = FakeRelease
+
+[if::ENV / ifENV::UploadToCPAN]
+key = REALRELEASE
+dz_plugin = UploadToCPAN
+
+;Shows up in dumpphases here.
+; * BlockRelease
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: After Release
 ; - description: something that runs after release is mostly complete
 
-;[Git::Commit]
+[if::ENV / ifENV::GitCommit]
+key = REALRELEASE
+dz_plugin = Git::Commit
 
-;[Git::CommitBuild]
-;branch = build/%b
-;release_branch = release
-;message = %h
+[if::ENV / ifENV::GitCommitBuild]
+key = REALRELEASE
+dz_plugin = Git::CommitBuild
+>= branch = 
+>= release_branch = release
+>= release_message = %v%t-%h
 
-;[Git::Tag]
-;tag_format = v%v
-;branch = release
+[if::ENV / ifENV::GitTag]
+key = REALRELEASE
+dz_plugin = Git::Tag
+>= tag_format = v%v%t
+>= branch = release
 
-;[Git::Push]
-;push_to = origin
-;push_to = origin HEAD:refs/head/release
-;push_to = origin HEAD:refs/notes/commits
+[if::ENV / ifENV::GitPush]
+key = REALRELEASE
+dz_plugin = Git::Push
+>= push_to = origin
+>= push_to = origin HEAD:refs/head/release
+>= push_to = origin HEAD:refs/notes/commits
 
-;[Twitter]
-;tweet = Released {{$DIST}}-{{$VERSION}}{{$TRIAL}} {{$URL}} - {{$ABSTRACT}}
-;hash-tags = #perl #cpan
+[if::ENV / ifENV::Twitter]
+key = REALRELEASE
+dz_plugin = Twitter
+>= tweet = Released {{$DIST}}-{{$VERSION}}{{$TRIAL}} {{$URL}} - {{$ABSTRACT}}
+>= hash-tags = #perl #cpan
+
+[if::ENV / ifENV::SchwartzRatio]
+key = REALRELEASE
+dz_plugin = SchwartzRatio
 
 [Clean]
 
-;[BumpVersionAfterRelease]
-;[CopyFilesFromRelease]
-;[SchwartzRatio]
+;Shows up in dumpphases here.
+; * Git::NextVersion
+; * NextRelease
+; * ReadmeAnyFromPod
+; * PodRoot
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -366,10 +462,15 @@ allow_dirty = .travis.yml
 ; Not going to use
 
 ;[AbstractFromPOD]
+;[AppendExternalData]
 ;[AssertOS]
+;[Authority]
+;[AuthorityFromModule]
+;[AutoModuleShareDirs]
 ;[AutoVersion]
 ;[Bugtracker] superceded by GitHub::Meta
 ;[BuildSelf]
+;[BumpVersionAfterRelease]
 ;[BumpVersionFromGit]
 ;[ChangelogFromGit]
 ;[ChangeStats::Git]
@@ -377,41 +478,73 @@ allow_dirty = .travis.yml
 ;[CheckLib]
 ;[CoalescePod]
 ;[CoderwallEndorse]
+;[Config::Git]
 ;[Conflicts]
 ;[ContributorsFile]
+;[CopyFilesFromRelease]
 ;[CopyReadmeFromBuild] superceded by ReadmeAnyFromPod
 ;[CopyTo]
 ;[Covenant]
 ;[CustomLicense]
+;[DynamicPrereqs]
 ;[Encoding] keeps causing errors
 ;[EnsureNotStale] same as [PromptIfStale] with fatal set
 ;[EnsurePrereqsInstalled]
 ;[FakeFaker]
 ;[FatPacker]
+;[GenerateFile]
+;[GenerateFile::ShareDir]
+;[Git::Describe]
+;[Git::DescribeVersion]
 ;[GitFmtChanges]
+;[Git::GatherDir]
 ;[GitHub::Create] don't want to automatically create repos on github
 ;[GithubMeta] superceded by GitHub::Meta
 ;[GitHub] not really a plugin, use Create, Meta and/or Update
 ;[GitHub::Update]
+;[Git::Init]
 ;[Git::NextRelease]
+;[Git::NextVersion::Sanitized]
+;[Git::Remote::Check]
+;[Git::Remote::Check::BeforeBuild]
+;[Git::Remote::Update]
+;[Git::Remote::Update::BeforeBuild]
+;[Git] this is a namespace place holder
 ;[HelpWanted]
+;[Homepage]
+;[if]
+;[if::not]
 ;[InlineFiles] this is an abstract class
 ;[InlineIncluder]
 ;[InsertExample]
 ;[ManifestInRoot]
 ;[MatchManifest] depends on Encoding, which I can't get working
+;[MetaConfig]
 ;[MetaData::BuiltWith]
 ;[MetaData::BuiltWith::All]
+;[Meta::Dynamic::Config]
 ;[MetaProvides]
 ;[MetaProvides::Class]
 ;[MetaProvides::FromFile]
 ;[MetaProvides::Package]
+;[MetaResources]
 ;[MetaResourcesFromGit] [GitHub::Meta] superceds this
+;[ModuleBuildDatabase]
+;[ModuleBuild::OptionalXS]
+;[ModuleBuild::RequireXS]
+;[ModuleBuildTiny]
 ;[ModuleBuildTiny::Fallback]
+;[ModuleBuild::XSOrPP]
+;[ModuleIncluder]
 ;[ModuleInstall]
+;[ModuleShareDirs]
+;[MungeFile::WithConfigFile]
+;[MungeFile::WithData]
+;[MungeFile::WithDataSection]
 ;[NextVersion::Semantic]
 ;[NoAutomatedTesting]
 ;[OnlyCorePrereqs]
+;[OptionalFeature]
 ;[OSPrereqs]
 ;[OurDate]
 ;[OverridePkgVersion]
@@ -423,12 +556,29 @@ allow_dirty = .travis.yml
 ;[PodWeaverIfPod]
 ;[Precompute]
 ;[Prepender]
+;[Prereqs::FromCPANfile]
+;[PurePerlTests]
 ;[Readme]
 ;[ReadmeFromPod] use ReadmeAnyFromPod instead
+;[ReleaseOnlyWithLatest]
+;[RemovePrereqs]
+;[RemovePrereqsMatching]
 ;[ReportVersions::Tiny]
+;[Repository]
 ;[ReversionOnRelease]
 ;[RewriteVersion]
 ;[RewriteVersion::Sanitized]
+;[RPM::Push]
+;[Rsync]
+;[Run]
+;[Run::AfterBuild]
+;[Run::AfterMint]
+;[Run::AfterRelease]
+;[Run::BeforeBuild]
+;[Run::BeforeRelease]
+;[Run::Release]
+;[Run::Role::Runner]
+;[ScpDeploy]
 ;[SetScriptShebang]
 ;[ShareDir::Tarball]
 ;[Signature]
@@ -436,6 +586,7 @@ allow_dirty = .travis.yml
 ;[StaticVersion]
 ;[SubmittingPatches]
 ;[Test::CreateFromMojoTemplates]
+;[Test::DiagINC] causes errors I don't have time to track down
 ;[Test::Fixme]
 ;[Test::Kwalitee::Extra] overlaps and conflicts with Test::Kwalitee
 ;[Test::LocalBrew]
@@ -443,6 +594,9 @@ allow_dirty = .travis.yml
 ;[Test::Portability] not interested in worrying about portability
 ;[TextTabs]
 ;[TravisYML] can't get the .travis.yml file generated properly
+;[Upload::SCP]
+;[UploadToCpanSite]
+;[VersionFromScript]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; DEPRECATED
@@ -458,72 +612,6 @@ allow_dirty = .travis.yml
 
 ;[FileKeywords]
 ;[BumpVersion]
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; To be examined later
-
-;[AppendExternalData]
-;[AssertOS]
-;[Authority]
-;[AuthorityFromModule]
-;[AutoModuleShareDirs]
-;[Conflicts]
-;[Covenant]
-;[DynamicPrereqs]
-;[GenerateFile]
-;[GenerateFile::ShareDir]
-;[Git]
-;[Git::Contributors]
-;[Git::DescribeVersion]
-;[Git::ExcludeUntracked]
-;[Git::GatherDir]
-;[Git::Init]
-;[Git::NextVersion::Sanitized]
-;[Git::Remote::Check]
-;[Git::Remote::Check::BeforeBuild]
-;[Git::Remote::Update]
-;[Git::Remote::Update::BeforeBuild]
-;[Homepage]
-;[if]
-;[if::ENV]
-;[if::not]
-;[if::not::ENV]
-;[MetaConfig]
-;[Meta::Dynamic::Config]
-;[MetaResources]
-;[ModuleBuildDatabase]
-;[ModuleBuild::OptionalXS]
-;[ModuleBuild::RequireXS]
-;[ModuleBuildTiny]
-;[ModuleBuildTiny::Fallback]
-;[ModuleBuild::XSOrPP]
-;[ModuleIncluder]
-;[ModuleShareDirs]
-;[MungeFile::WithConfigFile]
-;[MungeFile::WithData]
-;[MungeFile::WithDataSection]
-;[OptionalFeature]
-;[Prereqs::FromCPANfile]
-;[PurePerlTests]
-;[ReleaseOnlyWithLatest]
-;[RemovePrereqs]
-;[RemovePrereqsMatching]
-;[Repository]
-;[RPM::Push]
-;[Rsync]
-;[Run]
-;[Run::AfterBuild]
-;[Run::AfterMint]
-;[Run::AfterRelease]
-;[Run::BeforeBuild]
-;[Run::BeforeRelease]
-;[Run::Role::Runner]
-;[ScpDeploy]
-;[ShareDir::Tarball]
-;[Test::DiagINC]
-;[Upload::SCP]
-;[UploadToCpanSite]
-;[VersionFromScript]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;[ReportPhase/PhaseEnds]
