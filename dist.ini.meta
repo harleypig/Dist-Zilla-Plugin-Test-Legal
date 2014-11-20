@@ -10,233 +10,134 @@ copyright_year   = 2014
 ; !!! release tests?
 ; !!!
 
+; Use ReportPhase to get this information.
+
+; Phases for 'dzil build'
+;   Before Build
+;   File Gatherer (Gather Files)
+;   File Pruner (Prune Files)
+;   Version Provider (Provide Version)
+;   File Munger (Munge Files)
+;     Meta Provider (Metadata)
+;   Bundle Config
+;   Install Tool (Setup Installer)
+;     Share Dir
+;   After Build
+;   Before Archive
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[ReportPhase/PhaseBegins]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[BlockRelease]
+[VerifyPhases]
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Author prereqs not detected by Dist::Zilla
 ;
-; authordep Dist::Zilla::Plugin::BlockRelease
-; authordep Dist::Zilla::Plugin::CheckChangeLog
-; authordep Dist::Zilla::Plugin::Clean
-; authordep Dist::Zilla::Plugin::ConsistentVersionTest
-; authordep Dist::Zilla::Plugin::CopyReadmeFromBuild
-; authordep Dist::Zilla::Plugin::Git::Check
-; authordep Dist::Zilla::Plugin::GithubMeta
-; authordep Dist::Zilla::Plugin::Git::NextVersion
-; authordep Dist::Zilla::Plugin::HasVersionTests
-; authordep Dist::Zilla::Plugin::InstallGuide
-; authordep Dist::Zilla::Plugin::NoSmartCommentsTests
-; authordep Dist::Zilla::Plugin::OurPkgVersion
-; authordep Dist::Zilla::Plugin::PerlTidy
-; authordep Dist::Zilla::Plugin::PodWeaver
-; authordep Dist::Zilla::Plugin::Prereqs::AuthorDeps
-; authordep Dist::Zilla::Plugin::ReadmeFromPod
-; authordep Dist::Zilla::Plugin::ReportVersions
-; authordep Dist::Zilla::Plugin::Test::ChangesHasContent
-; authordep Dist::Zilla::Plugin::Test::CheckChanges
-; authordep Dist::Zilla::Plugin::Test::CheckDeps
-; authordep Dist::Zilla::Plugin::Test::CheckManifest
-; authordep Dist::Zilla::Plugin::Test::CleanNamespaces
-; authordep Dist::Zilla::Plugin::Test::Compile
-; authordep Dist::Zilla::Plugin::Test::Compile::PerFile
-; authordep Dist::Zilla::Plugin::Test::CPAN::Changes
-; authordep Dist::Zilla::Plugin::Test::CPAN::Meta::JSON
-; authordep Dist::Zilla::Plugin::Test::DistManifest
+; SKIP authordep Code::TidyAll
+; SKIP authordep Dist::Zilla::Plugin::BlockRelease
+; SKIP authordep Dist::Zilla::PluginBundle::Git::CheckFor
+; SKIP authordep Dist::Zilla::Plugin::CheckChangeLog
+; SKIP authordep Dist::Zilla::Plugin::CheckChangesHasContent
+; SKIP authordep Dist::Zilla::Plugin::Clean
+; SKIP authordep Dist::Zilla::Plugin::ConsistentVersionTest
+; SKIP authordep Dist::Zilla::Plugin::CopyReadmeFromBuild
+; SKIP authordep Dist::Zilla::Plugin::Git
+; SKIP authordep Dist::Zilla::Plugin::Git::NextVersion::Sanitized
+; SKIP authordep Dist::Zilla::Plugin::HasVersionTests
+; SKIP authordep Dist::Zilla::Plugin::InstallGuide
+; SKIP authordep Dist::Zilla::Plugin::NoSmartCommentsTests
+; SKIP authordep Dist::Zilla::Plugin::OurPkgVersion
+; SKIP authordep Dist::Zilla::Plugin::PerlTidy
+; SKIP authordep Dist::Zilla::Plugin::PodWeaver
+; SKIP authordep Dist::Zilla::Plugin::PodWeaverIfPod
+; SKIP authordep Dist::Zilla::Plugin::Prereqs::AuthorDeps
+; SKIP authordep Dist::Zilla::Plugin::ReadmeFromPod
+; SKIP authordep Dist::Zilla::Plugin::ReportVersions
+; SKIP authordep Dist::Zilla::Plugin::ReportVersions::Tiny
+; SKIP authordep Dist::Zilla::Plugin::Test::CheckChanges
+; SKIP authordep Dist::Zilla::Plugin::Test::CheckDeps
+; SKIP authordep Dist::Zilla::Plugin::Test::CheckManifest
+; SKIP authordep Dist::Zilla::Plugin::Test::CleanNamespaces
+; SKIP authordep Dist::Zilla::Plugin::Test::Compile
+; SKIP authordep Dist::Zilla::Plugin::Test::Compile::PerFile
+; SKIP authordep Dist::Zilla::Plugin::Test::CPAN::Changes
+; SKIP authordep Dist::Zilla::Plugin::Test::CPAN::Meta::JSON
+; SKIP authordep Dist::Zilla::Plugin::Test::DistManifest
 ; SKIP authordep Dist::Zilla::Plugin::Test::EOF
-; authordep Dist::Zilla::Plugin::Test::EOL
-; authordep Dist::Zilla::Plugin::Test::Inline
-; authordep Dist::Zilla::Plugin::Test::Kwalitee
-; authordep Dist::Zilla::Plugin::Test::MinimumVersion
-; authordep Dist::Zilla::Plugin::Test::NoTabs
+; SKIP authordep Dist::Zilla::Plugin::Test::EOL
+; SKIP authordep Dist::Zilla::Plugin::Test::Inline
+; SKIP authordep Dist::Zilla::Plugin::Test::Kwalitee
+; SKIP authordep Dist::Zilla::Plugin::Test::Kwalitee::Extra
+; SKIP authordep Dist::Zilla::Plugin::Test::MinimumVersion
+; SKIP authordep Dist::Zilla::Plugin::Test::NoTabs
 ; SKIP authordep Dist::Zilla::Plugin::Test::PAUSE::Permissions
-; authordep Dist::Zilla::Plugin::Test::Perl::Critic
-; authordep Dist::Zilla::Plugin::Test::Pod::LinkCheck
-; authordep Dist::Zilla::Plugin::Test::Pod::No404s
-; authordep Dist::Zilla::Plugin::Test::PodSpelling
-; authordep Dist::Zilla::Plugin::Test::ReportPrereqs
-; authordep Dist::Zilla::Plugin::Test::UnusedVars
-; authordep Dist::Zilla::Plugin::Test::UseAllModules
-; authordep Dist::Zilla::Plugin::Test::Version
-; authordep Dist::Zilla::Plugin::Travis::TestRelease
-; authordep Perl::Critic::Policy::Bangs::ProhibitBitwiseOperators
-; authordep Perl::Critic::Policy::Bangs::ProhibitCommentedOutCode
-; authordep Perl::Critic::Policy::Bangs::ProhibitDebuggingModules
-; authordep Perl::Critic::Policy::Bangs::ProhibitFlagComments
-; authordep Perl::Critic::Policy::Bangs::ProhibitNoPlan
-; authordep Perl::Critic::Policy::Bangs::ProhibitNumberedNames
-; authordep Perl::Critic::Policy::Bangs::ProhibitUselessRegexModifiers
-; authordep Perl::Critic::Policy::Bangs::ProhibitVagueNames
-; authordep Perl::Critic::Policy::CodeLayout::ProhibitFatCommaNewline
-; authordep Perl::Critic::Policy::CodeLayout::ProhibitHashBarewords
-; authordep Perl::Critic::Policy::CodeLayout::ProhibitIfIfSameLine
-; authordep Perl::Critic::Policy::CodeLayout::ProhibitSpaceIndentation
-; authordep Perl::Critic::Policy::CodeLayout::RequireASCII
-; authordep Perl::Critic::Policy::CodeLayout::RequireFinalSemicolon
-; authordep Perl::Critic::Policy::CodeLayout::RequireTrailingCommaAtNewline
-; authordep Perl::Critic::Policy::CodeLayout::RequireUseUTF8
-; authordep Perl::Critic::Policy::CodeLayout::TabIndentSpaceAlign
-; authordep Perl::Critic::Policy::Compatibility::ConstantLeadingUnderscore
-; authordep Perl::Critic::Policy::Compatibility::ConstantPragmaHash
-; authordep Perl::Critic::Policy::Compatibility::Gtk2Constants
-; authordep Perl::Critic::Policy::Compatibility::PerlMinimumVersionAndWhy
-; authordep Perl::Critic::Policy::Compatibility::PodMinimumVersion
-; authordep Perl::Critic::Policy::Compatibility::ProhibitThreeArgumentOpen
-; authordep Perl::Critic::Policy::Compatibility::ProhibitUnixDevNull
-; authordep Perl::Critic::Policy::Documentation::ProhibitAdjacentLinks
-; authordep Perl::Critic::Policy::Documentation::ProhibitBadAproposMarkup
-; authordep Perl::Critic::Policy::Documentation::ProhibitDuplicateHeadings
-; authordep Perl::Critic::Policy::Documentation::ProhibitDuplicateSeeAlso
-; authordep Perl::Critic::Policy::Documentation::ProhibitLinkToSelf
-; authordep Perl::Critic::Policy::Documentation::ProhibitParagraphEndComma
-; authordep Perl::Critic::Policy::Documentation::ProhibitParagraphTwoDots
-; authordep Perl::Critic::Policy::Documentation::ProhibitUnbalancedParens
-; authordep Perl::Critic::Policy::Documentation::ProhibitVerbatimMarkup
-; authordep Perl::Critic::Policy::Documentation::RequireEndBeforeLastPod
-; authordep Perl::Critic::Policy::Documentation::RequireFilenameMarkup
-; authordep Perl::Critic::Policy::Documentation::RequireFinalCut
-; authordep Perl::Critic::Policy::Documentation::RequireLinkedURLs
-; authordep Perl::Critic::Policy::Documentation::RequirePODUseEncodingUTF8
-; authordep Perl::Critic::Policy::Editor::RequireEmacsFileVariables
-; authordep Perl::Critic::Policy::ErrorHandling::RequireUseOfExceptions
-; authordep Perl::Critic::Policy::Lax::ProhibitComplexMappings::LinesNotStatements
-; authordep Perl::Critic::Policy::Lax::ProhibitEmptyQuotes::ExceptAsFallback
-; authordep Perl::Critic::Policy::Lax::ProhibitLeadingZeros::ExceptChmod
-; authordep Perl::Critic::Policy::Lax::ProhibitStringyEval::ExceptForRequire
-; authordep Perl::Critic::Policy::Lax::RequireEndWithTrueConst
-; authordep Perl::Critic::Policy::Lax::RequireExplicitPackage::ExceptForPragmata
-; authordep Perl::Critic::Policy::logicLAB::ModuleBlacklist
-; authordep Perl::Critic::Policy::logicLAB::ProhibitShellDispatch
-; authordep Perl::Critic::Policy::logicLAB::ProhibitUseLib
-; authordep Perl::Critic::Policy::logicLAB::RequirePackageNamePattern
-; authordep Perl::Critic::Policy::logicLAB::RequireParamsValidate
-; authordep Perl::Critic::Policy::Miscellanea::RequireRcsKeywords
-; authordep Perl::Critic::Policy::Miscellanea::TextDomainPlaceholders
-; authordep Perl::Critic::Policy::Miscellanea::TextDomainUnused
-; authordep Perl::Critic::Policy::Modules::PerlMinimumVersion
-; authordep Perl::Critic::Policy::Modules::ProhibitModuleShebang
-; authordep Perl::Critic::Policy::Modules::ProhibitPOSIXimport
-; authordep Perl::Critic::Policy::Modules::ProhibitUseQuotedVersion
-; authordep Perl::Critic::Policy::Modules::RequireExplicitInclusion
-; authordep Perl::Critic::Policy::Modules::RequirePerlVersion
-; authordep Perl::Critic::Policy::NamingConventions::ProhibitMixedCaseSubs
-; authordep Perl::Critic::Policy::NamingConventions::ProhibitMixedCaseVars
-; authordep Perl::Critic::Policy::OTRS::ProhibitDumper
-; authordep Perl::Critic::Policy::OTRS::ProhibitFetchrowHashref
-; authordep Perl::Critic::Policy::OTRS::ProhibitLocaltime
-; authordep Perl::Critic::Policy::OTRS::ProhibitLowPrecedenceOps
-; authordep Perl::Critic::Policy::OTRS::ProhibitOpen
-; authordep Perl::Critic::Policy::OTRS::ProhibitPushISA
-; authordep Perl::Critic::Policy::OTRS::ProhibitRequire
-; authordep Perl::Critic::Policy::OTRS::ProhibitRmtree
-; authordep Perl::Critic::Policy::OTRS::ProhibitSomeCoreFunctions
-; authordep Perl::Critic::Policy::OTRS::RequireCamelCase
-; authordep Perl::Critic::Policy::OTRS::RequireParensWithMethods
-; authordep Perl::Critic::Policy::OTRS::RequireTrueReturnValueForModules
-; authordep Perl::Critic::Policy::Storable::ProhibitStoreOrFreeze
-; authordep Perl::Critic::Policy::Subroutines::ProhibitCallsToUndeclaredSubs
-; authordep Perl::Critic::Policy::Subroutines::ProhibitCallsToUnexportedSubs
-; authordep Perl::Critic::Policy::Subroutines::ProhibitExportingUndeclaredSubs
-; authordep Perl::Critic::Policy::Subroutines::ProhibitQualifiedSubDeclarations
-; authordep Perl::Critic::Policy::Tics::ProhibitLongLines
-; authordep Perl::Critic::Policy::Tics::ProhibitManyArrows
-; authordep Perl::Critic::Policy::Tics::ProhibitUseBase
-; authordep Perl::Critic::Policy::ValuesAndExpressions::ConstantBeforeLt
-; authordep Perl::Critic::Policy::ValuesAndExpressions::NotWithCompare
-; authordep Perl::Critic::Policy::ValuesAndExpressions::PreventSQLInjection
-; authordep Perl::Critic::Policy::ValuesAndExpressions::ProhibitAccessOfPrivateData
-; authordep Perl::Critic::Policy::ValuesAndExpressions::ProhibitArrayAssignAref
-; authordep Perl::Critic::Policy::ValuesAndExpressions::ProhibitBarewordDoubleColon
-; authordep Perl::Critic::Policy::ValuesAndExpressions::ProhibitDuplicateHashKeys
-; authordep Perl::Critic::Policy::ValuesAndExpressions::ProhibitEmptyCommas
-; authordep Perl::Critic::Policy::ValuesAndExpressions::ProhibitFiletest_f
-; authordep Perl::Critic::Policy::ValuesAndExpressions::ProhibitNullStatements
-; authordep Perl::Critic::Policy::ValuesAndExpressions::ProhibitUnknownBackslash
-; authordep Perl::Critic::Policy::ValuesAndExpressions::RequireConstantOnLeftSideOfEquality
-; authordep Perl::Critic::Policy::ValuesAndExpressions::RequireNumericVersion
-; authordep Perl::Critic::Policy::ValuesAndExpressions::RestrictLongStrings
-; authordep Perl::Critic::Policy::ValuesAndExpressions::UnexpandedSpecialLiteral
-; authordep Perl::Critic::Policy::Variables::ProhibitUnusedVarsStricter
-; authordep Perl::Critic::Policy::Variables::ProhibitUselessInitialization
-; authordep Pod::Elemental::Transformer::List
-; authordep Pod::Weaver::Plugin::EnsureUniqueSections
-; authordep Pod::Weaver::Plugin::StopWords
-; authordep Pod::Weaver::Section::Availability
-; authordep Pod::Weaver::Section::Installation
-; authordep Pod::Weaver::Section::SeeAlso
-; authordep Pod::Weaver::Section::SourceGitHub
-; authordep Pod::Weaver::Section::Support
-; authordep Pod::Weaver::Section::WarrantyDisclaimer
+; SKIP authordep Dist::Zilla::Plugin::Test::Perl::Critic
+; SKIP authordep Dist::Zilla::Plugin::Test::Pod::LinkCheck
+; SKIP authordep Dist::Zilla::Plugin::Test::Pod::No404s
+; SKIP authordep Dist::Zilla::Plugin::Test::PodSpelling
+; SKIP authordep Dist::Zilla::Plugin::Test::ReportPrereqs
+; SKIP authordep Dist::Zilla::Plugin::Test::UnusedVars
+; SKIP authordep Dist::Zilla::Plugin::Test::UseAllModules
+; SKIP authordep Dist::Zilla::Plugin::Test::Version
+; SKIP authordep Dist::Zilla::TravisCI
+; SKIP authordep Perl::Critic::Bangs
+; SKIP authordep Perl::Critic::Compatibility
+; SKIP authordep Perl::Critic::Deprecated
+; SKIP authordep Perl::Critic::Itch
+; SKIP authordep Perl::Critic::Lax
+; SKIP authordep Perl::Critic::More
+; SKIP authordep Perl::Critic::Nits
+; SKIP authordep Perl::Critic::OTRS
+; SKIP authordep Perl::Critic::PetPeeves::JTRAMMELL
+; SKIP authordep Perl::Critic::Policy::CodeLayout::ProhibitSpaceIndentation
+; SKIP authordep Perl::Critic::Policy::CodeLayout::TabIndentSpaceAlign
+; SKIP authordep Perl::Critic::Policy::logicLAB::ModuleBlacklist
+; SKIP authordep Perl::Critic::Policy::logicLAB::ProhibitShellDispatch
+; SKIP authordep Perl::Critic::Policy::logicLAB::ProhibitUseLib
+; SKIP authordep Perl::Critic::Policy::logicLAB::RequirePackageNamePattern
+; SKIP authordep Perl::Critic::Policy::logicLAB::RequireParamsValidate
+; SKIP authordep Perl::Critic::Policy::ValuesAndExpressions::PreventSQLInjection
+; SKIP authordep Perl::Critic::Policy::Variables::ProhibitUnusedVarsStricter
+; SKIP authordep Perl::Critic::Pulp
+; SKIP authordep Perl::Critic::Storable
+; SKIP authordep Perl::Critic::StricterSubs
+; SKIP authordep Perl::Critic::Swift
+; SKIP authordep Perl::Critic::Tics
+; SKIP authordep Pod::Elemental::Transformer::List
+; SKIP authordep Pod::Elemental::Transformer::List::Converter
+; SKIP authordep Pod::Weaver::Plugin::EnsureUniqueSections
+; SKIP authordep Pod::Weaver::Plugin::StopWords
+; SKIP authordep Pod::Weaver::Section::Availability
+; SKIP authordep Pod::Weaver::Section::Installation
+; SKIP authordep Pod::Weaver::Section::SeeAlso
+; SKIP authordep Pod::Weaver::Section::SourceGitHub
+; SKIP authordep Pod::Weaver::Section::Support
+; SKIP authordep Pod::Weaver::Section::WarrantyDisclaimer
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;[ReportPhase/PhaseBegins]
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Before Build
+; - description: something that runs before building really begins
+
+[PromptIfStale]
+check_all_plugins = 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: Version Provider
-; - description: something that provides a version number for the dist
-
-[Git::NextVersion]
-first_version = 0.01
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: Meta Provider
-; - description: something that provides metadata (for META.yml/json)
-
-;[Breaks]
-;Foo::Bar = <= 1.1
-
-[Bugtracker]
-web = http://github.com/harleypig/%s/issues
-
-[GithubMeta]
-homepage = http://metacpan.org/release/Dist-Zilla-Plugin-Test-Legal
-
-[MetaNoIndex]
-directory = t
-directory = xt
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: ExecFiles
-
-[ExecDir]
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: Share Dir
-; - description: something that picks a directory to install as shared files
-
-[ShareDir]
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: File Gatherer
+;Phase: File Gatherer (Gather Files)
 ; - description: something that gathers files into the distribution
+
+;[PodInherit] don't have need for this at the moment, but keeping it here just in case
+;[Pod2Html] could be used for gh-pages
 
 [GatherDir]
 include_dotfiles = 1
 prune_directory = .git
 
-;[ChangelogFromGit]
-;[Conflicts]
-;[ContributorsFile]
-;[Covenant]
-;[CPANFile]
-;[FakeFaker]
-;[GitFmtChanges]
-;[InlineFiles]
-;[InlineIncluder]
+[CPANFile]
 [License]
-[Manifest]
-;[ManifestInRoot]
 [MetaJSON]
 [MetaYAML]
-;[PodInherit]
-;[Readme]
-;[ReadmeAnyFromPod]
-[ReportVersions]
-;[ReportVersions::Tiny]
-;[ShareDir::Tarball]
-;[Signature]
-;[SpellingCommonMistakesTests]
-;[SubmittingPatches]
-;[TestMLIncluder]
-;[VerifyPhases]
 
 ; Tests
 
@@ -246,6 +147,7 @@ prune_directory = .git
 [NoSmartCommentsTests]
 [PodCoverageTests]
 [PodSyntaxTests]
+[ReportVersions]
 
 [Test::ChangesHasContent]
 [Test::CheckChanges]
@@ -286,9 +188,19 @@ spell_cmd = aspell list
 stopwords = LICENCE
 stopwords = MERCHANTABILITY
 
+[InstallGuide]
+[Manifest]
+
+;Shows up in dumpphases here.
+; * ReadmeAnyFromPod => Dist::Zilla::Plugin::ReadmeAnyFromPod
+; * PodRoot => Dist::Zilla::Plugin::ReadmeAnyFromPod
+; * ModuleBuild => Dist::Zilla::Plugin::ModuleBuild
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: File Pruner
+;Phase: File Pruner (Prune Files)
 ; - description: something that removes found files from the distribution
+
+[ManifestSkip]
 
 [PruneFiles]
 filename = cover
@@ -302,43 +214,111 @@ except = \.perl.*
 ;except = \.perlcriticrc
 ;except = \.perltidyrc
 
-[ManifestSkip]
+;Shows up in dumpphases here.
+; * Test::CPAN::Meta::JSON => Dist::Zilla::Plugin::Test::CPAN::Meta::JSON
+; * Git::NextVersion => Dist::Zilla::Plugin::Git::NextVersion
+; * ReadmeAnyFromPod => Dist::Zilla::Plugin::ReadmeAnyFromPod
+; * PodRoot => Dist::Zilla::Plugin::ReadmeAnyFromPod
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: File Munger
+;Phase: Version Provider (Provide Version)
+; - description: something that provides a version number for the dist
+
+[Git::NextVersion]
+first_version = 0.01
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: File Munger (Munge Files)
 ; - description: something that alters a file's destination or content
 
-;[ChangeStats::Git]
-;[CheckBin]
-;[CheckLib]
-;[CoalescePod]
-;[CoderwallEndorse]
 [ExtraTests]
-;[FatPacker]
-;[InsertExample]
-;[MetaData::BuiltWith]
-;[MetaData::BuiltWith::All]
 [NextRelease]
-;[OurDate]
 [OurPkgVersion]
-;[OverridePkgVersion]
-;[PkgDist]
-;[PkgVersion]
-;[PkgVersionIfModuleWithPod]
-;[PodVersion]
+
 [PodWeaver]
-;[PodWeaverIfPod]
-;[Precompute]
-;[Prepender]
-;[Readme]
-;[ReversionOnRelease]
-;[SetScriptShebang]
-;[TextTabs]
+
+[ReadmeAnyFromPod]
+[ReadmeAnyFromPod / PodRoot]
+filename = README.pod
 
 [PerlTidy]
 
+;Shows up in dumpphases here.
+; * Test::ChangesHasContent => Dist::Zilla::Plugin::Test::ChangesHasContent
+; * Test::CleanNamespaces => Dist::Zilla::Plugin::Test::CleanNamespaces
+; * Test::Compile => Dist::Zilla::Plugin::Test::Compile
+; * Test::NoTabs => Dist::Zilla::Plugin::Test::NoTabs
+; * Test::PodSpelling => Dist::Zilla::Plugin::Test::PodSpelling
+; * InstallGuide => Dist::Zilla::Plugin::InstallGuide
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Meta Provider (Metadata)
+; - description: something that provides metadata (for META.yml/json)
+
+;[Breaks]
+;Foo::Bar = <= 1.1
+
+[GitHub::Meta]
+
+[MetaNoIndex]
+directory = t
+directory = xt
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Bundle Config
+; - description: not sure
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Install Tool (Installer)
+; - description: something that creates an install program for a dist
+
+[CheckChangeLog]
+
+[ModuleBuild]
+; https://github.com/Perl-Toolchain-Gang/Module-Build/issues/48
+mb_version = 0.4208
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Share Dir
+; - description: something that picks a directory to install as shared files
+
+[ShareDir]
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: After Build
+; - description: something that runs after building is mostly complete
+
+[CheckSelfDependency]
+
+;[GitHubREADME::Badge]
+
+;Shows up in dumpphases here.
+; * ReadmeAnyFromPod => Dist::Zilla::Plugin::ReadmeAnyFromPod
+; * PodRoot => Dist::Zilla::Plugin::ReadmeAnyFromPod
+; * PromptIfStale => Dist::Zilla::Plugin::PromptIfStale
+; * Git::Check => Dist::Zilla::Plugin::Git::Check
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Before Archive
+; - description: something that runs before the archive file is built
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: ExecFiles
+
+[ExecDir]
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Register Prereqs
+
+; NOTE: This is being called sometime during 'dzil build' but is not
+;       being reported by ReportPhase, so I'm not sure where this
+;       belongs in the list at the top of this file.
 
 [AutoPrereqs]
 
@@ -346,220 +326,140 @@ except = \.perl.*
 
 [Prereqs / ConfigureRequires]
 ; perl 5.8.9 isn't installing MB::Version
-Module::Build::Version   = 0
+Module::Build::Version = 0
+
+;[Prereqs / ConfigureRecommends]
+;[Prereqs / ConfigureSuggests]
+;[Prereqs / ConfigureConflicts]
 
 [Prereqs / BuildRequires]
-Module::Build::Version   = 0
+;Module::Build::Version   = 0
 
-[Prereqs / DevelopRequires]
-Dist::Zilla::Plugin::BlockRelease                                               = 0
-Dist::Zilla::Plugin::CheckChangeLog                                             = 0
-Dist::Zilla::Plugin::Clean                                                      = 0
-Dist::Zilla::Plugin::ConsistentVersionTest                                      = 0
-Dist::Zilla::Plugin::CopyReadmeFromBuild                                        = 0
-Dist::Zilla::Plugin::Git::Check                                                 = 0
-Dist::Zilla::Plugin::GithubMeta                                                 = 0
-Dist::Zilla::Plugin::Git::NextVersion                                           = 0
-Dist::Zilla::Plugin::HasVersionTests                                            = 0
-Dist::Zilla::Plugin::InstallGuide                                               = 0
-Dist::Zilla::Plugin::NoSmartCommentsTests                                       = 0
-Dist::Zilla::Plugin::OurPkgVersion                                              = 0
-Dist::Zilla::Plugin::PerlTidy                                                   = 0
-Dist::Zilla::Plugin::PodWeaver                                                  = 0
-Dist::Zilla::Plugin::Prereqs::AuthorDeps                                        = 0
-Dist::Zilla::Plugin::ReadmeFromPod                                              = 0
-Dist::Zilla::Plugin::ReportVersions                                             = 0
-Dist::Zilla::Plugin::Test::ChangesHasContent                                    = 0
-Dist::Zilla::Plugin::Test::CheckChanges                                         = 0
-Dist::Zilla::Plugin::Test::CheckDeps                                            = 0
-Dist::Zilla::Plugin::Test::CheckManifest                                        = 0
-Dist::Zilla::Plugin::Test::CleanNamespaces                                      = 0
-Dist::Zilla::Plugin::Test::Compile                                              = 0
-Dist::Zilla::Plugin::Test::Compile::PerFile                                     = 0
-Dist::Zilla::Plugin::Test::CPAN::Changes                                        = 0
-Dist::Zilla::Plugin::Test::CPAN::Meta::JSON                                     = 0
-Dist::Zilla::Plugin::Test::DistManifest                                         = 0
-;Dist::Zilla::Plugin::Test::EOF                                                 = 0
-Dist::Zilla::Plugin::Test::EOL                                                  = 0
-Dist::Zilla::Plugin::Test::Inline                                               = 0
-Dist::Zilla::Plugin::Test::Kwalitee                                             = 0
-Dist::Zilla::Plugin::Test::MinimumVersion                                       = 0
-Dist::Zilla::Plugin::Test::NoTabs                                               = 0
-;Dist::Zilla::Plugin::Test::PAUSE::Permissions                                   = 0
-Dist::Zilla::Plugin::Test::Perl::Critic                                         = 0
-Dist::Zilla::Plugin::Test::Pod::LinkCheck                                       = 0
-Dist::Zilla::Plugin::Test::Pod::No404s                                          = 0
-Dist::Zilla::Plugin::Test::PodSpelling                                          = 0
-Dist::Zilla::Plugin::Test::ReportPrereqs                                        = 0
-Dist::Zilla::Plugin::Test::UnusedVars                                           = 0
-Dist::Zilla::Plugin::Test::UseAllModules                                        = 0
-Dist::Zilla::Plugin::Test::Version                                              = 0
-Dist::Zilla::Plugin::Travis::TestRelease                                        = 0
-Perl::Critic::Policy::Bangs::ProhibitBitwiseOperators                           = 0
-Perl::Critic::Policy::Bangs::ProhibitCommentedOutCode                           = 0
-Perl::Critic::Policy::Bangs::ProhibitDebuggingModules                           = 0
-Perl::Critic::Policy::Bangs::ProhibitFlagComments                               = 0
-Perl::Critic::Policy::Bangs::ProhibitNoPlan                                     = 0
-Perl::Critic::Policy::Bangs::ProhibitNumberedNames                              = 0
-Perl::Critic::Policy::Bangs::ProhibitUselessRegexModifiers                      = 0
-Perl::Critic::Policy::Bangs::ProhibitVagueNames                                 = 0
-Perl::Critic::Policy::CodeLayout::ProhibitFatCommaNewline                       = 0
-Perl::Critic::Policy::CodeLayout::ProhibitHashBarewords                         = 0
-Perl::Critic::Policy::CodeLayout::ProhibitIfIfSameLine                          = 0
-Perl::Critic::Policy::CodeLayout::ProhibitSpaceIndentation                      = 0
-Perl::Critic::Policy::CodeLayout::RequireASCII                                  = 0
-Perl::Critic::Policy::CodeLayout::RequireFinalSemicolon                         = 0
-Perl::Critic::Policy::CodeLayout::RequireTrailingCommaAtNewline                 = 0
-Perl::Critic::Policy::CodeLayout::RequireUseUTF8                                = 0
-Perl::Critic::Policy::CodeLayout::TabIndentSpaceAlign                           = 0
-Perl::Critic::Policy::Compatibility::ConstantLeadingUnderscore                  = 0
-Perl::Critic::Policy::Compatibility::ConstantPragmaHash                         = 0
-Perl::Critic::Policy::Compatibility::Gtk2Constants                              = 0
-Perl::Critic::Policy::Compatibility::PerlMinimumVersionAndWhy                   = 0
-Perl::Critic::Policy::Compatibility::PodMinimumVersion                          = 0
-Perl::Critic::Policy::Compatibility::ProhibitThreeArgumentOpen                  = 0
-Perl::Critic::Policy::Compatibility::ProhibitUnixDevNull                        = 0
-Perl::Critic::Policy::Documentation::ProhibitAdjacentLinks                      = 0
-Perl::Critic::Policy::Documentation::ProhibitBadAproposMarkup                   = 0
-Perl::Critic::Policy::Documentation::ProhibitDuplicateHeadings                  = 0
-Perl::Critic::Policy::Documentation::ProhibitDuplicateSeeAlso                   = 0
-Perl::Critic::Policy::Documentation::ProhibitLinkToSelf                         = 0
-Perl::Critic::Policy::Documentation::ProhibitParagraphEndComma                  = 0
-Perl::Critic::Policy::Documentation::ProhibitParagraphTwoDots                   = 0
-Perl::Critic::Policy::Documentation::ProhibitUnbalancedParens                   = 0
-Perl::Critic::Policy::Documentation::ProhibitVerbatimMarkup                     = 0
-Perl::Critic::Policy::Documentation::RequireEndBeforeLastPod                    = 0
-Perl::Critic::Policy::Documentation::RequireFilenameMarkup                      = 0
-Perl::Critic::Policy::Documentation::RequireFinalCut                            = 0
-Perl::Critic::Policy::Documentation::RequireLinkedURLs                          = 0
-Perl::Critic::Policy::Documentation::RequirePODUseEncodingUTF8                  = 0
-Perl::Critic::Policy::Editor::RequireEmacsFileVariables                         = 0
-Perl::Critic::Policy::ErrorHandling::RequireUseOfExceptions                     = 0
-Perl::Critic::Policy::Lax::ProhibitComplexMappings::LinesNotStatements          = 0
-Perl::Critic::Policy::Lax::ProhibitEmptyQuotes::ExceptAsFallback                = 0
-Perl::Critic::Policy::Lax::ProhibitLeadingZeros::ExceptChmod                    = 0
-Perl::Critic::Policy::Lax::ProhibitStringyEval::ExceptForRequire                = 0
-Perl::Critic::Policy::Lax::RequireEndWithTrueConst                              = 0
-Perl::Critic::Policy::Lax::RequireExplicitPackage::ExceptForPragmata            = 0
-Perl::Critic::Policy::logicLAB::ModuleBlacklist                                 = 0
-Perl::Critic::Policy::logicLAB::ProhibitShellDispatch                           = 0
-Perl::Critic::Policy::logicLAB::ProhibitUseLib                                  = 0
-Perl::Critic::Policy::logicLAB::RequirePackageNamePattern                       = 0
-Perl::Critic::Policy::logicLAB::RequireParamsValidate                           = 0
-Perl::Critic::Policy::Miscellanea::RequireRcsKeywords                           = 0
-Perl::Critic::Policy::Miscellanea::TextDomainPlaceholders                       = 0
-Perl::Critic::Policy::Miscellanea::TextDomainUnused                             = 0
-Perl::Critic::Policy::Modules::PerlMinimumVersion                               = 0
-Perl::Critic::Policy::Modules::ProhibitModuleShebang                            = 0
-Perl::Critic::Policy::Modules::ProhibitPOSIXimport                              = 0
-Perl::Critic::Policy::Modules::ProhibitUseQuotedVersion                         = 0
-Perl::Critic::Policy::Modules::RequireExplicitInclusion                         = 0
-Perl::Critic::Policy::Modules::RequirePerlVersion                               = 0
-Perl::Critic::Policy::NamingConventions::ProhibitMixedCaseSubs                  = 0
-Perl::Critic::Policy::NamingConventions::ProhibitMixedCaseVars                  = 0
-Perl::Critic::Policy::OTRS::ProhibitDumper                                      = 0
-Perl::Critic::Policy::OTRS::ProhibitFetchrowHashref                             = 0
-Perl::Critic::Policy::OTRS::ProhibitLocaltime                                   = 0
-Perl::Critic::Policy::OTRS::ProhibitLowPrecedenceOps                            = 0
-Perl::Critic::Policy::OTRS::ProhibitOpen                                        = 0
-Perl::Critic::Policy::OTRS::ProhibitPushISA                                     = 0
-Perl::Critic::Policy::OTRS::ProhibitRequire                                     = 0
-Perl::Critic::Policy::OTRS::ProhibitRmtree                                      = 0
-Perl::Critic::Policy::OTRS::ProhibitSomeCoreFunctions                           = 0
-Perl::Critic::Policy::OTRS::RequireCamelCase                                    = 0
-Perl::Critic::Policy::OTRS::RequireParensWithMethods                            = 0
-Perl::Critic::Policy::OTRS::RequireTrueReturnValueForModules                    = 0
-Perl::Critic::Policy::Storable::ProhibitStoreOrFreeze                           = 0
-Perl::Critic::Policy::Subroutines::ProhibitCallsToUndeclaredSubs                = 0
-Perl::Critic::Policy::Subroutines::ProhibitCallsToUnexportedSubs                = 0
-Perl::Critic::Policy::Subroutines::ProhibitExportingUndeclaredSubs              = 0
-Perl::Critic::Policy::Subroutines::ProhibitQualifiedSubDeclarations             = 0
-Perl::Critic::Policy::Tics::ProhibitLongLines                                   = 0
-Perl::Critic::Policy::Tics::ProhibitManyArrows                                  = 0
-Perl::Critic::Policy::Tics::ProhibitUseBase                                     = 0
-Perl::Critic::Policy::ValuesAndExpressions::ConstantBeforeLt                    = 0
-Perl::Critic::Policy::ValuesAndExpressions::NotWithCompare                      = 0
-Perl::Critic::Policy::ValuesAndExpressions::PreventSQLInjection                 = 0
-Perl::Critic::Policy::ValuesAndExpressions::ProhibitAccessOfPrivateData         = 0
-Perl::Critic::Policy::ValuesAndExpressions::ProhibitArrayAssignAref             = 0
-Perl::Critic::Policy::ValuesAndExpressions::ProhibitBarewordDoubleColon         = 0
-Perl::Critic::Policy::ValuesAndExpressions::ProhibitDuplicateHashKeys           = 0
-Perl::Critic::Policy::ValuesAndExpressions::ProhibitEmptyCommas                 = 0
-Perl::Critic::Policy::ValuesAndExpressions::ProhibitFiletest_f                  = 0
-Perl::Critic::Policy::ValuesAndExpressions::ProhibitNullStatements              = 0
-Perl::Critic::Policy::ValuesAndExpressions::ProhibitUnknownBackslash            = 0
-Perl::Critic::Policy::ValuesAndExpressions::RequireConstantOnLeftSideOfEquality = 0
-Perl::Critic::Policy::ValuesAndExpressions::RequireNumericVersion               = 0
-Perl::Critic::Policy::ValuesAndExpressions::RestrictLongStrings                 = 0
-Perl::Critic::Policy::ValuesAndExpressions::UnexpandedSpecialLiteral            = 0
-Perl::Critic::Policy::Variables::ProhibitUnusedVarsStricter                     = 0
-Perl::Critic::Policy::Variables::ProhibitUselessInitialization                  = 0
-Pod::Elemental::Transformer::List                                               = 0
-Pod::Weaver::Plugin::EnsureUniqueSections                                       = 0
-Pod::Weaver::Plugin::StopWords                                                  = 0
-Pod::Weaver::Section::Availability                                              = 0
-Pod::Weaver::Section::Installation                                              = 0
-Pod::Weaver::Section::SeeAlso                                                   = 0
-Pod::Weaver::Section::SourceGitHub                                              = 0
-Pod::Weaver::Section::Support                                                   = 0
-Pod::Weaver::Section::WarrantyDisclaimer                                        = 0
+;[Prereqs / BuildRecommends]
+;[Prereqs / BuildSuggests]
+;[Prereqs / BuildConflicts]
 
 [Prereqs / TestRequires]
-Test::CheckChanges                                                              = 0
-Test::CheckManifest                                                             = 0
-Test::ConsistentVersion                                                         = 0
-Test::CPAN::Meta::JSON                                                          = 0
-Test::DistManifest                                                              = 0
-Test::HasVersion                                                                = 0
-Test::MinimumVersion                                                            = 0
-Test::NoSmartComments                                                           = 0
-;Test::PAUSE::Permissions                                                        = 0
-Test::Perl::Critic                                                              = 0
-Test::Pod::Content                                                              = 0
-Test::Pod::LinkCheck                                                            = 0
-Test::Version                                                                   = 0
+;Test::CheckChanges        = 0
+;Test::CheckManifest       = 0
+;Test::ConsistentVersion   = 0
+;Test::CPAN::Meta::JSON    = 0
+;Test::DistManifest        = 0
+;Test::HasVersion          = 0
+;Test::MinimumVersion      = 0
+;Test::NoSmartComments     = 0
+;;Test::PAUSE::Permissions  = 0
+;Test::Perl::Critic        = 0
+;Test::Pod::Content        = 0
+;Test::Pod::LinkCheck      = 0
+;Test::Version             = 0
 
-[ModuleBuild]
-; https://github.com/Perl-Toolchain-Gang/Module-Build/issues/48
-mb_version                                                                      = 0.4208
+;[Prereqs / TestRecommends]
+;[Prereqs / TestSuggests]
+;[Prereqs / TestConflicts]
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: Install Tool
-; - description: something that creates an install program for a dist
+[Prereqs / RuntimeRequires]
 
-;[AssertOS]
-;[BuildSelf]
-;[CheckBin]
-[CheckChangeLog]
-;[CheckLib]
-;[Conflicts]
-;[FakeFaker]
-;[HelpWanted]
-[InstallGuide]
-;[MatchManifest]
-;[ModuleInstall]
-;[NoAutomatedTesting]
-;[OSPrereqs]
-;[PerlVersionPrereqs]
-[ReadmeFromPod]
-;[TextTabs]
+;[Prereqs / RuntimeRecommends]
+;[Prereqs / RuntimeSuggests]
+;[Prereqs / RuntimeConflicts]
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: After Build
-; - description: something that runs after building is mostly complete
+[Prereqs / DevelopRequires]
+;Code::TidyAll                                                   = 0
+;Dist::Zilla::Plugin::BlockRelease                               = 0
+;Dist::Zilla::PluginBundle::Git::CheckFor                        = 0
+;Dist::Zilla::Plugin::CheckChangeLog                             = 0
+;Dist::Zilla::Plugin::CheckChangesHasContent                     = 0
+;Dist::Zilla::Plugin::Clean                                      = 0
+;Dist::Zilla::Plugin::ConsistentVersionTest                      = 0
+;Dist::Zilla::Plugin::CopyReadmeFromBuild                        = 0
+;Dist::Zilla::Plugin::Git                                        = 0
+;Dist::Zilla::Plugin::Git::NextVersion::Sanitized                = 0
+;Dist::Zilla::Plugin::HasVersionTests                            = 0
+;Dist::Zilla::Plugin::InstallGuide                               = 0
+;Dist::Zilla::Plugin::NoSmartCommentsTests                       = 0
+;Dist::Zilla::Plugin::OurPkgVersion                              = 0
+;Dist::Zilla::Plugin::PerlTidy                                   = 0
+;Dist::Zilla::Plugin::PodWeaver                                  = 0
+;Dist::Zilla::Plugin::PodWeaverIfPod                             = 0
+;Dist::Zilla::Plugin::Prereqs::AuthorDeps                        = 0
+;Dist::Zilla::Plugin::ReadmeFromPod                              = 0
+;Dist::Zilla::Plugin::ReportVersions                             = 0
+;Dist::Zilla::Plugin::ReportVersions::Tiny                       = 0
+;Dist::Zilla::Plugin::Test::CheckChanges                         = 0
+;Dist::Zilla::Plugin::Test::CheckDeps                            = 0
+;Dist::Zilla::Plugin::Test::CheckManifest                        = 0
+;Dist::Zilla::Plugin::Test::CleanNamespaces                      = 0
+;Dist::Zilla::Plugin::Test::Compile                              = 0
+;Dist::Zilla::Plugin::Test::Compile::PerFile                     = 0
+;Dist::Zilla::Plugin::Test::CPAN::Changes                        = 0
+;Dist::Zilla::Plugin::Test::CPAN::Meta::JSON                     = 0
+;Dist::Zilla::Plugin::Test::DistManifest                         = 0
+;;Dist::Zilla::Plugin::Test::EOF                                  = 0
+;Dist::Zilla::Plugin::Test::EOL                                  = 0
+;Dist::Zilla::Plugin::Test::Inline                               = 0
+;Dist::Zilla::Plugin::Test::Kwalitee                             = 0
+;Dist::Zilla::Plugin::Test::Kwalitee::Extra                      = 0
+;Dist::Zilla::Plugin::Test::MinimumVersion                       = 0
+;Dist::Zilla::Plugin::Test::NoTabs                               = 0
+;;Dist::Zilla::Plugin::Test::PAUSE::Permissions                   = 0
+;Dist::Zilla::Plugin::Test::Perl::Critic                         = 0
+;Dist::Zilla::Plugin::Test::Pod::LinkCheck                       = 0
+;Dist::Zilla::Plugin::Test::Pod::No404s                          = 0
+;Dist::Zilla::Plugin::Test::PodSpelling                          = 0
+;Dist::Zilla::Plugin::Test::ReportPrereqs                        = 0
+;Dist::Zilla::Plugin::Test::UnusedVars                           = 0
+;Dist::Zilla::Plugin::Test::UseAllModules                        = 0
+;Dist::Zilla::Plugin::Test::Version                              = 0
+;Dist::Zilla::TravisCI                                           = 0
+;Perl::Critic::Bangs                                             = 0
+;Perl::Critic::Compatibility                                     = 0
+;Perl::Critic::Deprecated                                        = 0
+;Perl::Critic::Itch                                              = 0
+;Perl::Critic::Lax                                               = 0
+;Perl::Critic::More                                              = 0
+;Perl::Critic::Nits                                              = 0
+;Perl::Critic::OTRS                                              = 0
+;Perl::Critic::PetPeeves::JTRAMMELL                              = 0
+;Perl::Critic::Policy::CodeLayout::ProhibitSpaceIndentation      = 0
+;Perl::Critic::Policy::CodeLayout::TabIndentSpaceAlign           = 0
+;Perl::Critic::Policy::logicLAB::ModuleBlacklist                 = 0
+;Perl::Critic::Policy::logicLAB::ProhibitShellDispatch           = 0
+;Perl::Critic::Policy::logicLAB::ProhibitUseLib                  = 0
+;Perl::Critic::Policy::logicLAB::RequirePackageNamePattern       = 0
+;Perl::Critic::Policy::logicLAB::RequireParamsValidate           = 0
+;Perl::Critic::Policy::ValuesAndExpressions::PreventSQLInjection = 0
+;Perl::Critic::Policy::Variables::ProhibitUnusedVarsStricter     = 0
+;Perl::Critic::Pulp                                              = 0
+;Perl::Critic::Storable                                          = 0
+;Perl::Critic::StricterSubs                                      = 0
+;Perl::Critic::Swift                                             = 0
+;Perl::Critic::Tics                                              = 0
+;Pod::Elemental::Transformer::List                               = 0
+;Pod::Elemental::Transformer::List::Converter                    = 0
+;Pod::Weaver::Plugin::EnsureUniqueSections                       = 0
+;Pod::Weaver::Plugin::StopWords                                  = 0
+;Pod::Weaver::Section::Availability                              = 0
+;Pod::Weaver::Section::Installation                              = 0
+;Pod::Weaver::Section::SeeAlso                                   = 0
+;Pod::Weaver::Section::SourceGitHub                              = 0
+;Pod::Weaver::Section::Support                                   = 0
+;Pod::Weaver::Section::WarrantyDisclaimer                        = 0
 
-[CopyReadmeFromBuild]
-
-;[CheckSelfDependency]
-;[CopyTo]
-;[GitHubREADME::Badge]
-;[OnlyCorePrereqs]
-;[Signature]
-;[VerifyPhases]
+;[Prereqs / DevelopRecommends]
+;[Prereqs / DevelopSuggests]
+;[Prereqs / DevelopConflicts]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Before Release
 ; - description: something that runs before release really begins
+
+[CheckChangesHasContent]
+[CheckExtraTests]
+[CheckIssues]
+[CheckMetaResources]
+
+;[PromptIfStale] can be here, but I want to take care of this during development.
 
 [Git::Check]
 allow_dirty = dist.ini
@@ -570,14 +470,6 @@ allow_dirty = .travis.yml
 [TestRelease]
 [Travis::TestRelease]
 [ConfirmRelease]
-[BlockRelease]
-
-;[CheckChangesHasContent]
-;[CheckExtraTests]
-;[CheckIssues]
-;[CheckMetaResources]
-;[EnsureNotStale]
-;[EnsurePrereqsInstalled]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Releaser
@@ -619,41 +511,90 @@ allow_dirty = .travis.yml
 ;[SchwartzRatio]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: Before Build
-; - description: something that runs before building really begins
-
-;[AbstractFromPOD]
-;[CustomLicense]
-;[EnsureNotStale]
-;[EnsurePrereqsInstalled]
-;[ModuleBuildTiny::Fallback]
-;[PromptIfStale]
-;[VerifyPhases]
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: Before Archive
-; - description: something that runs before the archive file is built
-
-;[Signature]
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;[ReportPhase/PhaseEnds]
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Not going to use
 
+;[AbstractFromPOD]
+;[AssertOS]
 ;[AutoVersion]
+;[Bugtracker] superceded by GitHub::Meta
+;[BuildSelf]
 ;[BumpVersionFromGit]
+;[ChangelogFromGit]
+;[ChangeStats::Git]
+;[CheckBin]
+;[CheckLib]
+;[CoalescePod]
+;[CoderwallEndorse]
+;[Conflicts]
+;[ContributorsFile]
+;[CopyReadmeFromBuild] superceded by ReadmeAnyFromPod
+;[CopyTo]
+;[Covenant]
+;[CustomLicense]
+;[Encoding] keeps causing errors
+;[EnsureNotStale] same as [PromptIfStale] with fatal set
+;[EnsurePrereqsInstalled]
+;[FakeFaker]
+;[FatPacker]
+;[GitFmtChanges]
+;[GitHub::Create] don't want to automatically create repos on github
+;[GithubMeta] superceded by GitHub::Meta
+;[GitHub] not really a plugin, use Create, Meta and/or Update
+;[GitHub::Update]
+;[Git::NextRelease]
+;[HelpWanted]
+;[InlineFiles] this is an abstract class
+;[InlineIncluder]
+;[InsertExample]
+;[ManifestInRoot]
+;[MatchManifest] depends on Encoding, which I can't get working
+;[MetaData::BuiltWith]
+;[MetaData::BuiltWith::All]
+;[MetaProvides]
+;[MetaProvides::Class]
+;[MetaProvides::FromFile]
+;[MetaProvides::Package]
+;[MetaResourcesFromGit] [GitHub::Meta] superceds this
+;[ModuleBuildTiny::Fallback]
+;[ModuleInstall]
 ;[NextVersion::Semantic]
+;[NoAutomatedTesting]
+;[OnlyCorePrereqs]
+;[OSPrereqs]
+;[OurDate]
+;[OverridePkgVersion]
+;[PerlVersionPrereqs]
+;[PkgDist]
+;[PkgVersion]
+;[PkgVersionIfModuleWithPod]
+;[PodVersion] does [PodWeaver] do this?
+;[PodWeaverIfPod]
+;[Precompute]
+;[Prepender]
+;[Readme]
+;[ReadmeFromPod] use ReadmeAnyFromPod instead
+;[ReportVersions::Tiny]
+;[ReversionOnRelease]
 ;[RewriteVersion]
 ;[RewriteVersion::Sanitized]
+;[SetScriptShebang]
+;[ShareDir::Tarball]
+;[Signature]
+;[SpellingCommonMistakesTests] too old
 ;[StaticVersion]
+;[SubmittingPatches]
 ;[Test::CreateFromMojoTemplates]
 ;[Test::Fixme]
 ;[Test::Kwalitee::Extra] overlaps and conflicts with Test::Kwalitee
 ;[Test::LocalBrew]
+;[TestMLIncluder]
 ;[Test::Portability] not interested in worrying about portability
+;[TextTabs]
 ;[TravisYML] can't get the .travis.yml file generated properly
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -672,13 +613,16 @@ allow_dirty = .travis.yml
 ;[BumpVersion]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Causes errors I don't have time or inclination to track down.
-;   OR
 ; To be examined later
 
 ;[AppendExternalData]
+;[AssertOS]
+;[Authority]
+;[AuthorityFromModule]
 ;[AutoModuleShareDirs]
-;[Encoding]
+;[Conflicts]
+;[Covenant]
+;[DynamicPrereqs]
 ;[GenerateFile]
 ;[GenerateFile::ShareDir]
 ;[Git]
@@ -686,26 +630,20 @@ allow_dirty = .travis.yml
 ;[Git::DescribeVersion]
 ;[Git::ExcludeUntracked]
 ;[Git::GatherDir]
-;[GitHub]
-;[GitHub::Create]
-;[GitHub::Meta]
-;[GitHub::Update]
 ;[Git::Init]
-;[Git::NextRelease]
 ;[Git::NextVersion::Sanitized]
 ;[Git::Remote::Check]
 ;[Git::Remote::Check::BeforeBuild]
 ;[Git::Remote::Update]
 ;[Git::Remote::Update::BeforeBuild]
+;[Homepage]
 ;[if]
 ;[if::ENV]
 ;[if::not]
 ;[if::not::ENV]
-;[MetaProvides]
-;[MetaProvides::Class]
-;[MetaProvides::FromFile]
-;[MetaProvides::Package]
-;[MetaResourcesFromGit]
+;[MetaConfig]
+;[Meta::Dynamic::Config]
+;[MetaResources]
 ;[ModuleBuildDatabase]
 ;[ModuleBuild::OptionalXS]
 ;[ModuleBuild::RequireXS]
@@ -713,14 +651,18 @@ allow_dirty = .travis.yml
 ;[ModuleBuildTiny::Fallback]
 ;[ModuleBuild::XSOrPP]
 ;[ModuleIncluder]
+;[ModuleShareDirs]
 ;[MungeFile::WithConfigFile]
 ;[MungeFile::WithData]
 ;[MungeFile::WithDataSection]
 ;[OptionalFeature]
+;[Prereqs::FromCPANfile]
 ;[PurePerlTests]
 ;[ReleaseOnlyWithLatest]
 ;[RemovePrereqs]
 ;[RemovePrereqsMatching]
+;[Repository]
+;[RPM::Push]
 ;[Rsync]
 ;[Run]
 ;[Run::AfterBuild]
@@ -730,26 +672,12 @@ allow_dirty = .travis.yml
 ;[Run::BeforeRelease]
 ;[Run::Role::Runner]
 ;[ScpDeploy]
+;[ShareDir::Tarball]
 ;[Test::DiagINC]
 ;[Upload::SCP]
 ;[UploadToCpanSite]
 ;[VersionFromScript]
-;[AssertOS]
-;[Authority]
-;[AuthorityFromModule]
-;[Conflicts]
-;[Covenant]
-;[DynamicPrereqs]
-;[Homepage]
-;[MetaConfig]
-;[Meta::Dynamic::Config]
-;[MetaResources]
-;[OSPrereqs]
-;[PerlVersionPrereqs]
-;[Prereqs::FromCPANfile]
-;[Repository]
 
-;[ModuleShareDirs]
-;[ShareDir::Tarball]
-
-;[RPM::Push]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[ReportPhase/PhaseEnds]
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
