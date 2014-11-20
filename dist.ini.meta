@@ -35,76 +35,6 @@ copyright_year   = 2014
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Author prereqs not detected by Dist::Zilla
 ;
-; SKIP authordep Code::TidyAll
-; SKIP authordep Dist::Zilla::Plugin::BlockRelease
-; SKIP authordep Dist::Zilla::PluginBundle::Git::CheckFor
-; SKIP authordep Dist::Zilla::Plugin::CheckChangeLog
-; SKIP authordep Dist::Zilla::Plugin::CheckChangesHasContent
-; SKIP authordep Dist::Zilla::Plugin::Clean
-; SKIP authordep Dist::Zilla::Plugin::ConsistentVersionTest
-; SKIP authordep Dist::Zilla::Plugin::CopyReadmeFromBuild
-; SKIP authordep Dist::Zilla::Plugin::Git
-; SKIP authordep Dist::Zilla::Plugin::Git::NextVersion::Sanitized
-; SKIP authordep Dist::Zilla::Plugin::HasVersionTests
-; SKIP authordep Dist::Zilla::Plugin::InstallGuide
-; SKIP authordep Dist::Zilla::Plugin::NoSmartCommentsTests
-; SKIP authordep Dist::Zilla::Plugin::OurPkgVersion
-; SKIP authordep Dist::Zilla::Plugin::PerlTidy
-; SKIP authordep Dist::Zilla::Plugin::PodWeaver
-; SKIP authordep Dist::Zilla::Plugin::PodWeaverIfPod
-; SKIP authordep Dist::Zilla::Plugin::Prereqs::AuthorDeps
-; SKIP authordep Dist::Zilla::Plugin::ReadmeFromPod
-; SKIP authordep Dist::Zilla::Plugin::ReportVersions
-; SKIP authordep Dist::Zilla::Plugin::ReportVersions::Tiny
-; SKIP authordep Dist::Zilla::Plugin::Test::CheckChanges
-; SKIP authordep Dist::Zilla::Plugin::Test::CheckDeps
-; SKIP authordep Dist::Zilla::Plugin::Test::CheckManifest
-; SKIP authordep Dist::Zilla::Plugin::Test::CleanNamespaces
-; SKIP authordep Dist::Zilla::Plugin::Test::Compile
-; SKIP authordep Dist::Zilla::Plugin::Test::Compile::PerFile
-; SKIP authordep Dist::Zilla::Plugin::Test::CPAN::Changes
-; SKIP authordep Dist::Zilla::Plugin::Test::CPAN::Meta::JSON
-; SKIP authordep Dist::Zilla::Plugin::Test::DistManifest
-; SKIP authordep Dist::Zilla::Plugin::Test::EOF
-; SKIP authordep Dist::Zilla::Plugin::Test::EOL
-; SKIP authordep Dist::Zilla::Plugin::Test::Inline
-; SKIP authordep Dist::Zilla::Plugin::Test::Kwalitee
-; SKIP authordep Dist::Zilla::Plugin::Test::Kwalitee::Extra
-; SKIP authordep Dist::Zilla::Plugin::Test::MinimumVersion
-; SKIP authordep Dist::Zilla::Plugin::Test::NoTabs
-; SKIP authordep Dist::Zilla::Plugin::Test::PAUSE::Permissions
-; SKIP authordep Dist::Zilla::Plugin::Test::Perl::Critic
-; SKIP authordep Dist::Zilla::Plugin::Test::Pod::LinkCheck
-; SKIP authordep Dist::Zilla::Plugin::Test::Pod::No404s
-; SKIP authordep Dist::Zilla::Plugin::Test::PodSpelling
-; SKIP authordep Dist::Zilla::Plugin::Test::ReportPrereqs
-; SKIP authordep Dist::Zilla::Plugin::Test::UnusedVars
-; SKIP authordep Dist::Zilla::Plugin::Test::UseAllModules
-; SKIP authordep Dist::Zilla::Plugin::Test::Version
-; SKIP authordep Dist::Zilla::TravisCI
-; SKIP authordep Perl::Critic::Bangs
-; SKIP authordep Perl::Critic::Compatibility
-; SKIP authordep Perl::Critic::Deprecated
-; SKIP authordep Perl::Critic::Itch
-; SKIP authordep Perl::Critic::Lax
-; SKIP authordep Perl::Critic::More
-; SKIP authordep Perl::Critic::Nits
-; SKIP authordep Perl::Critic::OTRS
-; SKIP authordep Perl::Critic::PetPeeves::JTRAMMELL
-; SKIP authordep Perl::Critic::Policy::CodeLayout::ProhibitSpaceIndentation
-; SKIP authordep Perl::Critic::Policy::CodeLayout::TabIndentSpaceAlign
-; SKIP authordep Perl::Critic::Policy::logicLAB::ModuleBlacklist
-; SKIP authordep Perl::Critic::Policy::logicLAB::ProhibitShellDispatch
-; SKIP authordep Perl::Critic::Policy::logicLAB::ProhibitUseLib
-; SKIP authordep Perl::Critic::Policy::logicLAB::RequirePackageNamePattern
-; SKIP authordep Perl::Critic::Policy::logicLAB::RequireParamsValidate
-; SKIP authordep Perl::Critic::Policy::ValuesAndExpressions::PreventSQLInjection
-; SKIP authordep Perl::Critic::Policy::Variables::ProhibitUnusedVarsStricter
-; SKIP authordep Perl::Critic::Pulp
-; SKIP authordep Perl::Critic::Storable
-; SKIP authordep Perl::Critic::StricterSubs
-; SKIP authordep Perl::Critic::Swift
-; SKIP authordep Perl::Critic::Tics
 ; authordep Pod::Elemental::Transformer::List
 ; authordep Pod::Elemental::Transformer::List::Converter
 ; authordep Pod::Weaver::Plugin::EnsureUniqueSections
@@ -357,94 +287,12 @@ Test::Version             = 0
 ;[Prereqs / TestSuggests]
 ;[Prereqs / TestConflicts]
 
-[Prereqs / RuntimeRequires]
-
+;[Prereqs / RuntimeRequires]
 ;[Prereqs / RuntimeRecommends]
 ;[Prereqs / RuntimeSuggests]
 ;[Prereqs / RuntimeConflicts]
 
-[Prereqs / DevelopRequires]
-;Code::TidyAll                                                   = 0
-;Dist::Zilla::Plugin::BlockRelease                               = 0
-;Dist::Zilla::PluginBundle::Git::CheckFor                        = 0
-;Dist::Zilla::Plugin::CheckChangeLog                             = 0
-;Dist::Zilla::Plugin::CheckChangesHasContent                     = 0
-;Dist::Zilla::Plugin::Clean                                      = 0
-;Dist::Zilla::Plugin::ConsistentVersionTest                      = 0
-;Dist::Zilla::Plugin::CopyReadmeFromBuild                        = 0
-;Dist::Zilla::Plugin::Git                                        = 0
-;Dist::Zilla::Plugin::Git::NextVersion::Sanitized                = 0
-;Dist::Zilla::Plugin::HasVersionTests                            = 0
-;Dist::Zilla::Plugin::InstallGuide                               = 0
-;Dist::Zilla::Plugin::NoSmartCommentsTests                       = 0
-;Dist::Zilla::Plugin::OurPkgVersion                              = 0
-;Dist::Zilla::Plugin::PerlTidy                                   = 0
-;Dist::Zilla::Plugin::PodWeaver                                  = 0
-;Dist::Zilla::Plugin::PodWeaverIfPod                             = 0
-;Dist::Zilla::Plugin::Prereqs::AuthorDeps                        = 0
-;Dist::Zilla::Plugin::ReadmeFromPod                              = 0
-;Dist::Zilla::Plugin::ReportVersions                             = 0
-;Dist::Zilla::Plugin::ReportVersions::Tiny                       = 0
-;Dist::Zilla::Plugin::Test::CheckChanges                         = 0
-;Dist::Zilla::Plugin::Test::CheckDeps                            = 0
-;Dist::Zilla::Plugin::Test::CheckManifest                        = 0
-;Dist::Zilla::Plugin::Test::CleanNamespaces                      = 0
-;Dist::Zilla::Plugin::Test::Compile                              = 0
-;Dist::Zilla::Plugin::Test::Compile::PerFile                     = 0
-;Dist::Zilla::Plugin::Test::CPAN::Changes                        = 0
-;Dist::Zilla::Plugin::Test::CPAN::Meta::JSON                     = 0
-;Dist::Zilla::Plugin::Test::DistManifest                         = 0
-;;Dist::Zilla::Plugin::Test::EOF                                  = 0
-;Dist::Zilla::Plugin::Test::EOL                                  = 0
-;Dist::Zilla::Plugin::Test::Inline                               = 0
-;Dist::Zilla::Plugin::Test::Kwalitee                             = 0
-;Dist::Zilla::Plugin::Test::Kwalitee::Extra                      = 0
-;Dist::Zilla::Plugin::Test::MinimumVersion                       = 0
-;Dist::Zilla::Plugin::Test::NoTabs                               = 0
-;;Dist::Zilla::Plugin::Test::PAUSE::Permissions                   = 0
-;Dist::Zilla::Plugin::Test::Perl::Critic                         = 0
-;Dist::Zilla::Plugin::Test::Pod::LinkCheck                       = 0
-;Dist::Zilla::Plugin::Test::Pod::No404s                          = 0
-;Dist::Zilla::Plugin::Test::PodSpelling                          = 0
-;Dist::Zilla::Plugin::Test::ReportPrereqs                        = 0
-;Dist::Zilla::Plugin::Test::UnusedVars                           = 0
-;Dist::Zilla::Plugin::Test::UseAllModules                        = 0
-;Dist::Zilla::Plugin::Test::Version                              = 0
-;Dist::Zilla::TravisCI                                           = 0
-;Perl::Critic::Bangs                                             = 0
-;Perl::Critic::Compatibility                                     = 0
-;Perl::Critic::Deprecated                                        = 0
-;Perl::Critic::Itch                                              = 0
-;Perl::Critic::Lax                                               = 0
-;Perl::Critic::More                                              = 0
-;Perl::Critic::Nits                                              = 0
-;Perl::Critic::OTRS                                              = 0
-;Perl::Critic::PetPeeves::JTRAMMELL                              = 0
-;Perl::Critic::Policy::CodeLayout::ProhibitSpaceIndentation      = 0
-;Perl::Critic::Policy::CodeLayout::TabIndentSpaceAlign           = 0
-;Perl::Critic::Policy::logicLAB::ModuleBlacklist                 = 0
-;Perl::Critic::Policy::logicLAB::ProhibitShellDispatch           = 0
-;Perl::Critic::Policy::logicLAB::ProhibitUseLib                  = 0
-;Perl::Critic::Policy::logicLAB::RequirePackageNamePattern       = 0
-;Perl::Critic::Policy::logicLAB::RequireParamsValidate           = 0
-;Perl::Critic::Policy::ValuesAndExpressions::PreventSQLInjection = 0
-;Perl::Critic::Policy::Variables::ProhibitUnusedVarsStricter     = 0
-;Perl::Critic::Pulp                                              = 0
-;Perl::Critic::Storable                                          = 0
-;Perl::Critic::StricterSubs                                      = 0
-;Perl::Critic::Swift                                             = 0
-;Perl::Critic::Tics                                              = 0
-;Pod::Elemental::Transformer::List                               = 0
-;Pod::Elemental::Transformer::List::Converter                    = 0
-;Pod::Weaver::Plugin::EnsureUniqueSections                       = 0
-;Pod::Weaver::Plugin::StopWords                                  = 0
-;Pod::Weaver::Section::Availability                              = 0
-;Pod::Weaver::Section::Installation                              = 0
-;Pod::Weaver::Section::SeeAlso                                   = 0
-;Pod::Weaver::Section::SourceGitHub                              = 0
-;Pod::Weaver::Section::Support                                   = 0
-;Pod::Weaver::Section::WarrantyDisclaimer                        = 0
-
+;[Prereqs / DevelopRequires]
 ;[Prereqs / DevelopRecommends]
 ;[Prereqs / DevelopSuggests]
 ;[Prereqs / DevelopConflicts]
