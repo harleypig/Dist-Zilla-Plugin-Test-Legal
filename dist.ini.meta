@@ -170,7 +170,6 @@ first_version = 0.01
 ;Phase: File Munger (Munge Files)
 ; - description: something that alters a file's destination or content
 
-;[ExtraTests]
 [NextRelease]
 [OurPkgVersion]
 [Git::Contributors]
@@ -499,6 +498,7 @@ Test::Pod::Content = 0
 ;[Encoding] keeps causing errors
 ;[EnsureNotStale] same as [PromptIfStale] with fatal set
 ;[EnsurePrereqsInstalled]
+;[ExtraTests]
 ;[FakeFaker]
 ;[FatPacker]
 ;[GenerateFile]
