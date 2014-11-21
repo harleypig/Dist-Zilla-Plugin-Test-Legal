@@ -1,6 +1,8 @@
 Revision history for Dist-Zilla-Plugin-Test-Legal
 
 {{$NEXT}}
+
+0.02      2014-11-21 14:58:09+00:00 UTC
   - Brought dist up to date with dzil, added some dzil features, like dzil bakeini
   - Made test check for existence of dependent module and skip instead of dying if it didn't exist.
 
