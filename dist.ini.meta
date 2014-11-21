@@ -384,6 +384,7 @@ Test::Pod::Content = 0
 ;allow_dirty = weaver.ini
 ;allow_dirty = README.pod
 ;allow_dirty = .travis.yml
+untracked_files = ignore
 
 [TestRelease]
 [ConfirmRelease]
