@@ -30,8 +30,8 @@ copyright_year   = 2014
 ;   Test Runner
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;[ReportPhase/PhaseBegins]
-;[VerifyPhases]
+[ReportPhase/PhaseBegins]
+[VerifyPhases]
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -351,6 +351,9 @@ Test::Perl::Critic        = 0
 ;Test::Pod::LinkCheck      = 0
 Test::Version             = 0
 
+; for ConsistentVersionTest
+Test::Pod::Content = 0
+
 ;[Prereqs / TestRecommends]
 ;[Prereqs / TestSuggests]
 ;[Prereqs / TestConflicts]
@@ -370,20 +373,19 @@ Test::Version             = 0
 ; - description: something that runs before release really begins
 
 [CheckChangesHasContent]
-[CheckExtraTests]
 [CheckIssues]
 [CheckMetaResources]
 
 ;[PromptIfStale] can be here, but I want to take care of this during development.
 
 [Git::Check]
-allow_dirty = dist.ini
-allow_dirty = weaver.ini
-allow_dirty = README
-allow_dirty = .travis.yml
+;allow_dirty = dist.ini
+;allow_dirty = dist.ini.meta
+;allow_dirty = weaver.ini
+;allow_dirty = README.pod
+;allow_dirty = .travis.yml
 
 [TestRelease]
-[Travis::TestRelease]
 [ConfirmRelease]
 
 [BlockRelease]
@@ -475,6 +477,7 @@ dz_plugin = SchwartzRatio
 ;[ChangelogFromGit]
 ;[ChangeStats::Git]
 ;[CheckBin]
+;[CheckExtraTests]
 ;[CheckLib]
 ;[CoalescePod]
 ;[CoderwallEndorse]
@@ -593,6 +596,7 @@ dz_plugin = SchwartzRatio
 ;[TestMLIncluder]
 ;[Test::Portability] not interested in worrying about portability
 ;[TextTabs]
+;[Travis::TestRelease]
 ;[TravisYML] can't get the .travis.yml file generated properly
 ;[Upload::SCP]
 ;[UploadToCpanSite]
@@ -614,5 +618,5 @@ dz_plugin = SchwartzRatio
 ;[BumpVersion]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;[ReportPhase/PhaseEnds]
+[ReportPhase/PhaseEnds]
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

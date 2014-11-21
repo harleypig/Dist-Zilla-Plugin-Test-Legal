@@ -11,7 +11,7 @@ Dist::Zilla::Plugin::Test::Legal - common tests to check for copyright and licen
 
 =head1 VERSION
 
-  This document describes v0.02 of Dist::Zilla::Plugin::Test::Legal - released November 20, 2014 as part of Dist-Zilla-Plugin-Test-Legal.
+  This document describes v0.02 of Dist::Zilla::Plugin::Test::Legal - released November 21, 2014 as part of Dist-Zilla-Plugin-Test-Legal.
 
 =head1 SYNOPSIS
 

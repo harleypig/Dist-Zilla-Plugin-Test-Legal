@@ -1,0 +1,75 @@
+[BlockRelease] releases will be prevented!
+[PhaseBegins] ########## Before Build ##########
+[PhaseEnds] ########## Before Build ##########
+[DZ] beginning to build Dist-Zilla-Plugin-Test-Legal
+[PhaseBegins] ########## Gather Files ##########
+[DZ] guessing dist's main_module is lib/Dist/Zilla/Plugin/Test/Legal.pm
+[Test::Inline] extracting inline tests from POD sections
+[PhaseEnds] ########## Gather Files ##########
+[VerifyPhases] [91mmain_module has already been calculated by end of file gathering phase[0m
+[PhaseBegins] ########## Prune Files ##########
+[PhaseEnds] ########## Prune Files ##########
+[PhaseBegins] ########## Provide Version ##########
+[Git::NextVersion] Bumping version from 0.01 to 0.02
+[PhaseEnds] ########## Provide Version ##########
+[PhaseBegins] ########## Munge Files ##########
+[PhaseBegins] ########## Metadata ##########
+[GitHub::Meta] Getting GitHub repository info
+[PhaseEnds] ########## Metadata ##########
+[ExtraTests] rewriting release test xt/release/consistent-version.t
+[ExtraTests] rewriting release test xt/release/has-version.t
+[ExtraTests] rewriting release test xt/release/distmeta.t
+[ExtraTests] rewriting release test xt/release/no-smart-comments.t
+[ExtraTests] rewriting release test xt/release/pod-coverage.t
+[ExtraTests] rewriting release test xt/release/pod-syntax.t
+[ExtraTests] rewriting release test xt/release/changes_has_content.t
+[ExtraTests] rewriting release test xt/release/check-changes.t
+[ExtraTests] rewriting release test xt/release/check-manifest.t
+[ExtraTests] rewriting author test xt/author/clean-namespaces.t
+[ExtraTests] rewriting release test xt/release/cpan-changes.t
+[ExtraTests] rewriting release test xt/release/meta-json.t
+[ExtraTests] rewriting release test xt/release/dist-manifest.t
+[ExtraTests] rewriting author test xt/author/eol.t
+[ExtraTests] rewriting release test xt/release/kwalitee.t
+[ExtraTests] rewriting release test xt/release/minimum-version.t
+[ExtraTests] rewriting author test xt/author/no-tabs.t
+[ExtraTests] rewriting release test xt/release/pod-linkcheck.t
+[ExtraTests] rewriting release test xt/release/pod-no404s.t
+[ExtraTests] rewriting release test xt/release/unused-vars.t
+[ExtraTests] rewriting release test xt/release/test-version.t
+[ExtraTests] rewriting author test xt/author/critic.t
+[ExtraTests] rewriting author test xt/author/pod-spell.t
+[ReadmeAnyFromPod] someone tried to munge lib/Dist/Zilla/Plugin/Test/Legal.pm after we read from it. Making modifications again...
+[PhaseEnds] ########## Munge Files ##########
+[VerifyPhases] [91mprereqs have already been read from after munging phase![0m
+[PhaseBegins] ########## Bundle Config ##########
+[PhaseEnds] ########## Bundle Config ##########
+[PhaseBegins] ########## Setup Installer ##########
+[CheckChangeLog] [CheckChangeLog] OK with Changes
+[PhaseBegins] ########## Share Dir ##########
+[PhaseEnds] ########## Share Dir ##########
+[PhaseEnds] ########## Setup Installer ##########
+[DZ] writing Dist-Zilla-Plugin-Test-Legal in Dist-Zilla-Plugin-Test-Legal-0.02
+[PhaseBegins] ########## After Build ##########
+[PodRoot] overriding README.pod in root
+[PhaseEnds] ########## After Build ##########
+[PhaseBegins] ########## Before Archive ##########
+[PhaseEnds] ########## Before Archive ##########
+[DZ] building archive with Archive::Tar::Wrapper
+[DZ] writing archive to Dist-Zilla-Plugin-Test-Legal-0.02.tar.gz
+[PhaseBegins] ########## Before Release ##########
+[PromptIfStale] checking for stale modules...
+[CheckChangesHasContent] Checking Changes
+[CheckChangesHasContent] Changes OK
+[CheckIssues] [32mIssues on RT (https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Test-Legal):[0m
+[CheckIssues] [32m  open: 0   stalled: 0[0m
+[CheckIssues] [32mIssues on github (https://github.com/harleypig/Dist-Zilla-Plugin-Test-Legal):[0m
+[CheckIssues] [32m  open: 0[0m
+[CheckMetaResources] Checking META resources
+[CheckMetaResources] META resources OK
+[Git::Check] branch release_testing/master has some uncommitted files:
+[Git::Check] 	README.pod
+[Git::Check] 	dist.ini.meta
+[Git::Check] branch release_testing/master has some uncommitted files:
+[Git::Check] 	README.pod
+[Git::Check] 	dist.ini.meta at /opt/perl5/perls/perl-5.18.2/lib/site_perl/5.18.2/x86_64-linux/Moose/Meta/Method/Delegation.pm line 109.

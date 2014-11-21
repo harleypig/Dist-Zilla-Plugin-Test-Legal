@@ -17,7 +17,7 @@ matrix:
 branches:
   only:
     - /^release_testing\/.*/
-    - /^release\/.*/
+    - /^release$/
 env:
   - RELEASE_TESTING=1 AUTHOR_TESTING=1 AUTOMATED_TESTING=1 SKIP_POD_LINKCHECK=1
 #  - COVERAGE=1 AUTOMATED_TESTING=1
