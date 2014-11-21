@@ -11,7 +11,8 @@ Dist::Zilla::Plugin::Test::Legal - common tests to check for copyright and licen
 
 =head1 VERSION
 
-  This document describes v0.02 of Dist::Zilla::Plugin::Test::Legal - released November 21, 2014 as part of Dist-Zilla-Plugin-Test-Legal.
+  This document describes v0.02 of Dist::Zilla::Plugin::Test::Legal
+  Released November 21, 2014 as part of Dist-Zilla-Plugin-Test-Legal.
 
 =head1 SYNOPSIS
 
@@ -22,6 +23,16 @@ in C<dist.ini>
 =head1 DESCRIPTION
 
 This module will add a L<Test::Legal> test as a release test to your module
+
+=head1 REQUIRES
+
+=over 4
+
+=item * L<Moose>
+
+=item * L<namespace::autoclean>
+
+=back
 
 =head1 SUPPORT
 
@@ -53,6 +64,14 @@ Search CPAN
 The default CPAN search engine, useful to view POD in HTML format.
 
 L<http://search.cpan.org/dist/Dist-Zilla-Plugin-Test-Legal>
+
+=item *
+
+RT: CPAN's Bug Tracker
+
+The RT ( Request Tracker ) website is the default bug/issue tracking system for CPAN.
+
+L<https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Test-Legal>
 
 =item *
 
@@ -118,9 +137,7 @@ You can email the author of this module at C<AYOUNG at cpan.org> asking for help
 
 =head2 Bugs / Feature Requests
 
-Please report any bugs or feature requests by email to C<bug-dist-zilla-plugin-test-legal at rt.cpan.org>, or through
-the web interface at L<https://rt.cpan.org/Public/Bug/Report.html?Queue=Dist-Zilla-Plugin-Test-Legal>. You will be automatically notified of any
-progress on the request by the system.
+Please report any bugs or feature requests through the web interface at L<https://github.com/harleypig/Dist-Zilla-Plugin-Test-Legal/issues>. You will be automatically notified of any progress on the request by the system.
 
 =head2 Source Code
 
@@ -136,9 +153,21 @@ L<https://github.com/harleypig/Dist-Zilla-Plugin-Test-Legal>
 
 See perlmodinstall for information and options on installing Perl modules.
 
+=head1 CHANGES
+
+=head2 Version 0.01 (2012-01-03T20:17:03Z)
+
+=over 4
+
+=item *
+
+Initial Creation
+
+=back
+
 =head1 AUTHOR
 
-Alan Young <harleypig@gmail.com>
+Alan Young <ayoung@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 

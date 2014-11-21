@@ -1,5 +1,5 @@
 name             = Dist-Zilla-Plugin-Test-Legal
-author           = Alan Young <harleypig@gmail.com>
+author           = Alan Young <ayoung@cpan.org>
 license          = Perl_5
 copyright_holder = Alan Young
 copyright_year   = 2014
@@ -33,10 +33,12 @@ copyright_year   = 2014
 ;   see 'dzil build' above
 ;   Before Release
 ;     Test Runner
+;   Release
+;   After Release
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[ReportPhase/PhaseBegins]
-[VerifyPhases]
+;[ReportPhase/PhaseBegins]
+;[VerifyPhases]
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -304,7 +306,7 @@ dz_plugin = Git::Commit
 [if::ENV / ifENV::GitCommitBuild]
 key = REALRELEASE
 dz_plugin = Git::CommitBuild
->= branch = 
+>= branch =
 >= release_branch = release
 >= release_message = %v%t-%h
 
@@ -561,7 +563,7 @@ Test::Pod::Content = 0
 ;[PkgDist]
 ;[PkgVersion]
 ;[PkgVersionIfModuleWithPod]
-;[PodVersion] does [PodWeaver] do this?
+;[PodVersion] [PodWeaver] handles this with the [Version] plugin
 ;[PodWeaverIfPod]
 ;[Precompute]
 ;[Prepender]
@@ -624,5 +626,5 @@ Test::Pod::Content = 0
 ;[BumpVersion]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[ReportPhase/PhaseEnds]
+;[ReportPhase/PhaseEnds]
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
