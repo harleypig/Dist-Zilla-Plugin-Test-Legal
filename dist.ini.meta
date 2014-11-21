@@ -29,6 +29,11 @@ copyright_year   = 2014
 ;   see 'dzil build' above, skips Before Archive
 ;   Test Runner
 
+; Phases for 'dzil release'
+;   see 'dzil build' above
+;   Before Release
+;     Test Runner
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [ReportPhase/PhaseBegins]
 [VerifyPhases]
@@ -243,6 +248,98 @@ mb_version = 0.4208
 ; - description: something that runs before the archive file is built
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Before Release
+; - description: something that runs before release really begins
+
+[CheckChangesHasContent]
+[CheckIssues]
+[CheckMetaResources]
+
+;[PromptIfStale] can be here, but I want to take care of this during development.
+
+[Git::Check]
+;allow_dirty = dist.ini
+;allow_dirty = dist.ini.meta
+;allow_dirty = weaver.ini
+;allow_dirty = README.pod
+;allow_dirty = .travis.yml
+untracked_files = ignore
+
+[TestRelease]
+[ConfirmRelease]
+
+;[BlockRelease]
+
+;Shows up in dumpphases here.
+; * PromptIfStale
+; * Git::NextVersion
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Test Runner
+; - description: Runs tests?
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: Releaser
+; - description: something that makes a release of the dist
+
+[if::not::ENV / ifnotENV::FakeRelease]
+key = REALRELEASE
+dz_plugin = FakeRelease
+
+[if::ENV / ifENV::UploadToCPAN]
+key = REALRELEASE
+dz_plugin = UploadToCPAN
+
+;Shows up in dumpphases here.
+; * BlockRelease
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Phase: After Release
+; - description: something that runs after release is mostly complete
+
+[if::ENV / ifENV::GitCommit]
+key = REALRELEASE
+dz_plugin = Git::Commit
+
+[if::ENV / ifENV::GitCommitBuild]
+key = REALRELEASE
+dz_plugin = Git::CommitBuild
+>= branch = 
+>= release_branch = release
+>= release_message = %v%t-%h
+
+[if::ENV / ifENV::GitTag]
+key = REALRELEASE
+dz_plugin = Git::Tag
+>= tag_format = v%v%t
+>= branch = release
+
+[if::ENV / ifENV::GitPush]
+key = REALRELEASE
+dz_plugin = Git::Push
+>= push_to = origin
+>= push_to = origin HEAD:refs/head/release
+>= push_to = origin HEAD:refs/notes/commits
+
+[if::ENV / ifENV::Twitter]
+key = REALRELEASE
+dz_plugin = Twitter
+>= tweet = Released {{$DIST}}-{{$VERSION}}{{$TRIAL}} {{$URL}} - {{$ABSTRACT}}
+>= hash-tags = #perl #cpan
+
+[if::ENV / ifENV::SchwartzRatio]
+key = REALRELEASE
+dz_plugin = SchwartzRatio
+
+[Clean]
+
+;Shows up in dumpphases here.
+; * Git::NextVersion
+; * NextRelease
+; * ReadmeAnyFromPod
+; * PodRoot
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -257,10 +354,6 @@ mb_version = 0.4208
 
 ;Shows up in dumpphases here.
 ; * ModuleBuild
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: Test Runner
-; - description: Runs tests?
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Encoding Provider
@@ -367,94 +460,6 @@ Test::Pod::Content = 0
 ;[Prereqs / DevelopRecommends]
 ;[Prereqs / DevelopSuggests]
 ;[Prereqs / DevelopConflicts]
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: Before Release
-; - description: something that runs before release really begins
-
-[CheckChangesHasContent]
-[CheckIssues]
-[CheckMetaResources]
-
-;[PromptIfStale] can be here, but I want to take care of this during development.
-
-[Git::Check]
-;allow_dirty = dist.ini
-;allow_dirty = dist.ini.meta
-;allow_dirty = weaver.ini
-;allow_dirty = README.pod
-;allow_dirty = .travis.yml
-untracked_files = ignore
-
-[TestRelease]
-[ConfirmRelease]
-
-[BlockRelease]
-
-;Shows up in dumpphases here.
-; * PromptIfStale
-; * Git::NextVersion
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: Releaser
-; - description: something that makes a release of the dist
-
-[if::not::ENV / ifnotENV::FakeRelease]
-key = REALRELEASE
-dz_plugin = FakeRelease
-
-[if::ENV / ifENV::UploadToCPAN]
-key = REALRELEASE
-dz_plugin = UploadToCPAN
-
-;Shows up in dumpphases here.
-; * BlockRelease
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;Phase: After Release
-; - description: something that runs after release is mostly complete
-
-[if::ENV / ifENV::GitCommit]
-key = REALRELEASE
-dz_plugin = Git::Commit
-
-[if::ENV / ifENV::GitCommitBuild]
-key = REALRELEASE
-dz_plugin = Git::CommitBuild
->= branch = 
->= release_branch = release
->= release_message = %v%t-%h
-
-[if::ENV / ifENV::GitTag]
-key = REALRELEASE
-dz_plugin = Git::Tag
->= tag_format = v%v%t
->= branch = release
-
-[if::ENV / ifENV::GitPush]
-key = REALRELEASE
-dz_plugin = Git::Push
->= push_to = origin
->= push_to = origin HEAD:refs/head/release
->= push_to = origin HEAD:refs/notes/commits
-
-[if::ENV / ifENV::Twitter]
-key = REALRELEASE
-dz_plugin = Twitter
->= tweet = Released {{$DIST}}-{{$VERSION}}{{$TRIAL}} {{$URL}} - {{$ABSTRACT}}
->= hash-tags = #perl #cpan
-
-[if::ENV / ifENV::SchwartzRatio]
-key = REALRELEASE
-dz_plugin = SchwartzRatio
-
-[Clean]
-
-;Shows up in dumpphases here.
-; * Git::NextVersion
-; * NextRelease
-; * ReadmeAnyFromPod
-; * PodRoot
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
