@@ -44,14 +44,12 @@ copyright_year   = 2014
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Author prereqs not detected by Dist::Zilla
 ;
-; authordep Pod::Elemental::Transformer::List
-; authordep Pod::Elemental::Transformer::List::Converter
 ; authordep Pod::Weaver::Plugin::EnsureUniqueSections
 ; authordep Pod::Weaver::Plugin::StopWords
-; authordep Pod::Weaver::Section::Availability
+; authordep Pod::Weaver::Section::Changes
 ; authordep Pod::Weaver::Section::Installation
+; authordep Pod::Weaver::Section::Requires
 ; authordep Pod::Weaver::Section::SeeAlso
-; authordep Pod::Weaver::Section::SourceGitHub
 ; authordep Pod::Weaver::Section::Support
 ; authordep Pod::Weaver::Section::WarrantyDisclaimer
 
