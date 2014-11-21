@@ -89,7 +89,6 @@ prune_directory = .git
 [ReportVersions]
 
 [Test::ChangesHasContent]
-[Test::CheckChanges]
 [Test::CheckDeps]
 [Test::CheckManifest]
 [Test::CleanNamespaces]
@@ -171,7 +170,7 @@ first_version = 0.01
 ;Phase: File Munger (Munge Files)
 ; - description: something that alters a file's destination or content
 
-[ExtraTests]
+;[ExtraTests]
 [NextRelease]
 [OurPkgVersion]
 [Git::Contributors]
@@ -277,6 +276,8 @@ untracked_files = ignore
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Test Runner
 ; - description: Runs tests?
+
+[RunExtraTests]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Phase: Releaser
@@ -431,7 +432,6 @@ Module::Build::Version = 0
 ;[Prereqs / BuildConflicts]
 
 [Prereqs / TestRequires]
-Test::CheckChanges        = 0
 Test::CheckManifest       = 0
 Test::ConsistentVersion   = 0
 Test::CPAN::Meta::JSON    = 0
@@ -607,6 +607,10 @@ Test::Pod::Content = 0
 ;[Upload::SCP]
 ;[UploadToCpanSite]
 ;[VersionFromScript]
+
+;Assumes it is one level below (i.e., in t/test.t), but we're creating
+;xt/release/test.t.
+;[Test::CheckChanges]
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; DEPRECATED
