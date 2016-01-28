@@ -38,7 +38,7 @@ use Test::More;
 
 eval 'use Test::Legal';
 plan skip_all => 'Test::Legal required for testing licenses'
-  if $@
+  if $@;
 
-copyright_ok;
-license_ok;
+copyright_ok();
+license_ok();
