@@ -34,11 +34,22 @@ __[ xt/release/test-legal.t ]__
 use strict;
 use warnings;
 
-use Test::More;
+use Test::More qw(no_plan);
 
-eval 'use Test::Legal';
-plan skip_all => 'Test::Legal required for testing licenses'
-  if $@
+ SKIP: {
 
-copyright_ok;
-license_ok;
+     eval { require Test::Legal };	
+
+     skip "Test::Legal required for testing licences" if $@;
+     
+     eval { Test::Legal->import() };
+	
+     BAIL_OUT "Test::Legal reported error on import so aborting tests: $@" if $@;
+
+     can_ok( __PACKAGE__, qw(copyright_ok license_ok) );
+     
+     main->copyright_ok;
+     
+     main->license_ok;
+     
+};
