@@ -1,6 +1,8 @@
 Revision history for Dist-Zilla-Plugin-Test-Legal
 
 {{$NEXT}}
+
+0.03      2018-02-28 21:37:34-07:00 America/Boise
   - Brought dist up to date with dzil, made tests pass
   - Merged pull request from MorayJ
 
