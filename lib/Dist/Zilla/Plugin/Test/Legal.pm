@@ -38,18 +38,18 @@ use Test::More qw(no_plan);
 
  SKIP: {
 
-     eval { require Test::Legal };	
+     eval { require Test::Legal };
 
      skip "Test::Legal required for testing licences" if $@;
-     
+
      eval { Test::Legal->import() };
-	
+
      BAIL_OUT "Test::Legal reported error on import so aborting tests: $@" if $@;
 
      can_ok( __PACKAGE__, qw(copyright_ok license_ok) );
-     
+
      main->copyright_ok;
-     
+
      main->license_ok;
-     
+
 };
